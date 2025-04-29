@@ -308,7 +308,7 @@ footer a:focus {
   }
 }
 
-a, a:visited, a:hover, a:focused, a:link, a:active {
+a, a:visited, a:hover, a:focus, a:link, a:active {
   color: hotpink                       !important;
   font-weight: bold                    !important;
   text-decoration: underline           !important;

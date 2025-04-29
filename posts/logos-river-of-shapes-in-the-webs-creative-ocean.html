@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOSAYGO Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../theme.css">
+</head>
+<body>
+  <header>
+    <h1><a href="https://dosaygo.com">DOSAYGO Studio</a></h1>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/posts.html">Posts</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </header>
+  <main>
+    <article>
+      <h2>logos: Deterministic SVG Logo Generator</h2>
+      <p class="author">By <a href="/about.html#cris">Cris</a>, March 6, 2019</p>
+      <p>Generating diverse logos programmatically often lacks consistency across runs. I solved this with <a href="https://github.com/o0101/logos">logos</a>, a deterministic SVG generator that creates thousands of pseudorandom logos from a fixed set of drawing commands. In the web’s creative studio, logos is a painter’s palette, blending order and chaos to craft vibrant identities.</p>
+      <p>Using a set of commands (<code>Mllmlllllmlll</code>), logos applies transformations like flipping and skipping to generate varied SVG paths, ensuring the same input always yields the same logo.</p>
+      <pre><code>function t(commands, skipIndex = -1) {
+  let coords = [333, 333, 0, -100, 86.6, -50, -86.6, 50, -86.6, -50, 86.6, -50, 86.6, 50, 0, 100, -86.6, 50, -86.6, -50, 0, -100, -86.6, 50, 0, 100];
+  return `
+    <path d="
+      ${commands.split('').map((c, i) => {
+        if (skipIndex >= 0 && i == skipIndex) {
+          coords.shift(); coords.shift();
+          return '';
+        }
+        return `${c} ${coords.shift()} ${coords.shift()}`;
+      }).join(' ')}
+    "/>
+  `;
+}
+</code></pre>
+      <p>This code generates deterministic SVG paths, ensuring consistent logo variations. logos’s balance of randomness and predictability is its charm.</p>
+      <img src="logos-screenshot.jpg" alt="logos interface: a vibrant SVG logo grid, set against a creative studio backdrop with art supplies">
+      <p>Building logos was like mixing colors on a palette, finding harmony in controlled chaos. At <a href="https://dosaygo.com">DOSAYGO</a>, we value creativity, crafting tools that inspire. logos is a canvas for digital artistry, painting identities with a steady hand.</p>
+    </article>
+  </main>
+  <footer>
+    <p>© 2025 DOSAYGO Studio. <a href="/contact.html">Contact</a></p>
+  </footer>
+</body>
+</html>

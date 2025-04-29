@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOSAYGO Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../theme.css">
+</head>
+<body>
+  <header>
+    <h1><a href="https://dosaygo.com">DOSAYGO Studio</a></h1>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/posts.html">Posts</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </header>
+  <main>
+    <article>
+      <h2>Bang: Minimalist JavaScript View Framework</h2>
+      <p class="author">By <a href="/about.html#cris">Cris</a>, Undated</p>
+      <p>Modern web UI frameworks often burden developers with virtual DOM overhead and complex build steps, stifling the simplicity of crafting interactive interfaces. I sought a lighter path with <a href="https://www.npmjs.com/package/bang.html">! (Bang)</a>, a minimalist JavaScript view framework that leverages <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">Custom Elements</a> for component-based design, introduces a novel HTML comment-based syntax for void tags like <code>&lt;!sg-circle /&gt;</code>, and manages state-driven interactivity without a virtual DOM. In the web’s Zen garden, where every pebble counts, Bang is a raked path of clarity, inviting developers to create with effortless precision.</p>
+      <p>Bang uses <a href="https://developer.mozilla.org/en-US/docs/Web/API/Shadow_DOM">Shadow DOM</a> for scoped styles, ensuring components remain isolated, and relies on native JavaScript templating for rendering. The framework’s state management, via functions like <code>setState</code>, drives dynamic updates, while event handlers bring interactivity without build-time complexity. In a drawing app example, Bang powers a canvas where users add and resize circles, each circle a Custom Element with its own state and behavior, as serene as a garden’s still pond.</p>
+      <pre><code>class CircleDrawer extends Base {
+  static Radius = 32;
+
+  AddCircle(clickEvent) {
+    if (clickEvent.target.matches('sg-circle')) return;
+    const {clientX, clientY} = clickEvent;
+    const frame = clickEvent.target.closest('.canvas');
+    const {left, top} = frame.getBoundingClientRect();
+    const r = CircleDrawer.Radius;
+    const x = clientX - left;
+    const y = clientY - top;
+    const state = cloneState('circleDrawer');
+    state.circles.push({
+      key: `${x},${y}`,
+      x, y, 
+      radius: r
+    });
+    setState('circleDrawer', state, {save: true});
+  }
+
+  OpenSizer(event) {
+    if (event.type === 'contextmenu') {
+      event.preventDefault();
+    }
+    const selected = event.target.dataset.key;
+    const state = cloneState('circleDrawer');
+    state.selected = selected;
+    setState('circleDrawer', state);
+  }
+}
+</code></pre>
+      <p>This code defines a <code>CircleDrawer</code> component that adds circles to a canvas and opens a sizing modal, using Bang’s state management and event handling. The innovation lies in its restraint: zero virtual DOM, native templating with Custom Elements, and a clever void tag syntax (<code>&lt;!sg-circle /&gt;</code>) that simplifies component usage, all while maintaining interactivity as naturally as a Zen master rakes sand.</p>
+      <img src="bang-screenshot.jpg" alt="Bang interface: a Zen garden with a raked pebble path, alongside a digital canvas displaying interactive circles drawn by users">
+      <p>Building Bang was like tending a Zen garden, each line of code a deliberate stroke toward serenity. At <a href="https://dosaygo.com">DOSAYGO</a>, we value clarity and simplicity, crafting tools that empower without overwhelming. Bang is a quiet space for creation, a minimalist framework that lets developers craft UIs with the calm focus of a meditative practice.</p>
+    </article>
+  </main>
+  <footer>
+    <p>© 2025 DOSAYGO Studio. <a href="/contact.html">Contact</a></p>
+  </footer>
+</body>
+</html>

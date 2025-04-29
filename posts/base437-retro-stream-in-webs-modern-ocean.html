@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOSAYGO Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../theme.css">
+</head>
+<body>
+  <header>
+    <h1><a href="https://dosaygo.com">DOSAYGO Studio</a></h1>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/posts.html">Posts</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </header>
+  <main>
+    <article>
+      <h2>Base437: Retro Binary Visualization in HTML</h2>
+      <p class="author">By <a href="/about.html#cris">Cris</a>, March 15, 2025</p>
+      <p>Displaying binary data in HTML is often obscured by encoding like Base64, hiding its raw form. I tackled this with <a href="https://github.com/BrowserBox/Base437">Base437</a>, a JavaScript library that maps binary data to <a href="https://en.wikipedia.org/wiki/Code_page_437">IBM Code Page 437</a> characters, using data URLs for direct rendering. In the web’s retro tech museum, Base437 is a glowing CRT display, showcasing binary in the pixelated charm of 1980s DOS.</p>
+      <p>Base437 maps each byte to a Code Page 437 Unicode character, with the <code>tr</code> API allowing custom mappings for contexts like HTML attributes, ensuring compatibility.</p>
+      <pre><code>function encodeBase437(binaryData) {
+  const codePage437Map = new Map([
+    [0x00, '\u2400'], // NUL symbol
+    [0x01, '\u263A'], // Smiley face
+    // ... (mapping for all 256 Code Page 437 characters)
+    [0xFF, '\u25A0']  // Block
+  ]);
+  let result = '';
+  for (let byte of new Uint8Array(binaryData)) {
+    result += codePage437Map.get(byte) || '\uFFFD'; // Fallback to replacement char if unmapped
+  }
+  return `data:text/plain;charset=utf-8,${encodeURIComponent(result)}`;
+}
+</code></pre>
+      <p>This code maps binary bytes to Code Page 437 characters, rendering them directly in HTML. Base437’s nostalgic utility makes binary data visually accessible.</p>
+      <img src="base437-screenshot.jpg" alt="Base437 interface: a retro DOS terminal with glowing Code Page 437 characters, evoking 1980s tech">
+      <p>Building Base437 was like restoring a vintage computer, each glyph a piece of history. At <a href="https://dosaygo.com">DOSAYGO</a>, we value blending nostalgia with utility, creating tools that bridge past and present. Base437 is a window to the web’s origins, illuminating binary in a pixelated glow.</p>
+    </article>
+  </main>
+  <footer>
+    <p>© 2025 DOSAYGO Studio. <a href="/contact.html">Contact</a></p>
+  </footer>
+</body>
+</html>

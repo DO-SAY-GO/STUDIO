@@ -9,20 +9,20 @@
 </head>
 <body>
   <header>
-    <h1>DOSAYGO Studio</h1>
+    <h1><a href="https://dosaygo.com">DOSAYGO Studio</a></h1>
     <nav>
-      <a href="#home">Home</a>
-      <a href="#posts">Posts</a>
-      <a href="#about">About</a>
+      <a href="/index.html">Home</a>
+      <a href="/posts.html">Posts</a>
+      <a href="/about.html">About</a>
     </nav>
   </header>
   <main>
     <article>
-      <h2>Fully Hosted: A Guestbook on GitHub’s Shared Trail</h2>
-      <p class="author">By Cris, April 28, 2025</p>
-      <p>Along the web’s shared trail, where creators wander like travelers seeking connection, I envisioned a simple shelter—a guestbook app hosted entirely on GitHub, free for all, with no servers to anchor the journey. Fully Hosted took shape as a proof of concept, using GitHub Pages to paint a static front-end and GitHub Actions to carve a living database, an SQLite haven where messages could be written and read as naturally as notes left in a forest clearing. It was a quiet experiment, a space where anyone could leave their mark, hinting at grander dreams—like a collaborative code editor blooming from the same earth.</p>
-      <p>The trail began with GitHub Pages, a canvas for the guestbook’s HTML form, where users sign their names and messages, served as static whispers on the wind. Submitting an entry triggers a GitHub Action, a steady hand that writes to an SQLite database using sanitized inputs, then commits the changes back to the repository with a private SSH token, while a public token safely initiates the workflow. On the client side, `sql.js` reads the database directly in the browser, displaying entries like a trail of footprints, a seamless flow from write to read without a server’s shadow. This hack opened a path to endless possibilities—imagine a GitHub Pages code editor where anyone could collaboratively shape a repo’s code, a shared campfire of creation.</p>
-      <pre><code># GitHub Action workflow for Fully Hosted guestbook
+      <h2>Fully Hosted: GitHub-Powered Guestbook</h2>
+      <p class="author">By <a href="/about.html#cris">Cris</a>, April 28, 2025</p>
+      <p>Hosting a web app typically demands costly servers, a barrier for small projects. I bypassed this with <a href="https://github.com/DO-SAY-GO/fully-hosted">Fully Hosted</a>, a guestbook app entirely on <a href="https://github.com/">GitHub</a>, using <a href="https://docs.github.com/en/actions">GitHub Actions</a> and <a href="https://www.sqlite.org/index.html">SQLite</a> for the database and <a href="https://pages.github.com/">GitHub Pages</a> for HTML. In the web’s bustling marketplace, Fully Hosted is a cozy inn, welcoming visitors to leave their mark without a penny spent.</p>
+      <p>Messages are stored in an SQLite database via GitHub Actions, fetched and displayed on a static page using <a href="https://github.com/sql-js/sql.js/">sql.js</a>, making the app free and serverless.</p>
+      <pre><code># GitHub Action workflow to store messages
 name: Update Guestbook Database
 on:
   workflow_dispatch:
@@ -36,28 +36,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Sanitize inputs
-        run: |
-          node -e "const sanitizeHtml = require('sanitize-html');
-            const name = process.env.NAME;
-            const message = process.env.MESSAGE;
-            console.log('SANITIZED_NAME=' + sanitizeHtml(name, { allowedTags: [] }));
-            console.log('SANITIZED_MESSAGE=' + sanitizeHtml(message, { allowedTags: [] }));"
-        env:
-          NAME: ${{ inputs.name }}
-          MESSAGE: ${{ inputs.message }}
       - name: Insert guestbook entry
         run: |
           sqlite3 data.db "CREATE TABLE IF NOT EXISTS guestbook (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, message TEXT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);"
-          sqlite3 data.db "INSERT INTO guestbook (name, message) VALUES ('$SANITIZED_NAME', '$SANITIZED_MESSAGE');"
+          sqlite3 data.db "INSERT INTO guestbook (name, message) VALUES ('$NAME', '$MESSAGE');"
+        env:
+          NAME: ${{ inputs.name }}
+          MESSAGE: ${{ inputs.message }}
 </code></pre>
-      <p>The workflow above traces Fully Hosted’s gentle rhythm—an Action that sanitizes and writes guestbook entries to an SQLite database, a living record of shared moments committed back to the repo. The innovation lay in its simplicity: GitHub Actions became a serverless database, writing data as naturally as carving words into stone, while Pages and `sql.js` brought the entries to life in the browser, a seamless read without server-side overhead. A dual-token system—public for triggering, private for committing—kept the shelter secure, proving that GitHub’s tools could host dynamic apps, opening trails to dreams like collaborative code editing, as free and open as the sky above a traveler’s path.</p>
-      <img src="fully-hosted-screenshot.jpg" alt="Fully Hosted in action: a GitHub Pages guestbook with user entries, set against a backdrop of a forest clearing with a trail of footprints">
-      <p>In crafting Fully Hosted, I discovered the beauty of shared trails—how GitHub’s infrastructure can become a canvas for connection, its Actions and Pages a shelter for creativity. It stands as a reminder that even in the web’s vast expanse, we can build spaces of simplicity, as natural as the earth’s own offerings. Like a rider pausing to leave a note in a clearing, or a skydiver glimpsing a shared path below, Fully Hosted is a testament to the power of community, a quiet proof that whispers of code can grow into campfires of collaboration, carried forward on the web’s endless journey.</p>
+      <p>This workflow stores messages in SQLite, while the client renders them:</p>
+      <pre><code>async function displayMessages() {
+  const response = await fetch('data.db');
+  const buffer = await response.arrayBuffer();
+  const db = new SQL.Database(new Uint8Array(buffer));
+  const result = db.exec("SELECT * FROM guestbook");
+  renderMessages(result);
+}
+</code></pre>
+      <p>Fully Hosted’s charm is its accessibility, inviting all to participate without server costs.</p>
+      <img src="fully-hosted-screenshot.jpg" alt="Fully Hosted interface: a cozy inn guestbook on a wooden table, with a GitHub logo in the background">
+      <p>Creating Fully Hosted was like opening a roadside tavern, offering warmth without cost. At <a href="https://dosaygo.com">DOSAYGO</a>, we champion accessibility, building tools that invite everyone to the table. Fully Hosted is a welcoming space, a digital guestbook where stories are shared freely.</p>
     </article>
   </main>
   <footer>
-    <p>© 2025 DOSAYGO Studio. <a href="#contact">Contact</a></p>
+    <p>© 2025 DOSAYGO Studio. <a href="/contact.html">Contact</a></p>
   </footer>
 </body>
 </html>

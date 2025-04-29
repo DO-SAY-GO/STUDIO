@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOSAYGO Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../theme.css">
+</head>
+<body>
+  <header>
+    <h1><a href="https://dosaygo.com">DOSAYGO Studio</a></h1>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/posts.html">Posts</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </header>
+  <main>
+    <article>
+      <h2>!: Minimalist JavaScript View Framework</h2>
+      <p class="author">By <a href="/about.html#cris">Cris</a>, Undated</p>
+      <p>Building web UIs often involves heavy frameworks with virtual DOM overhead, complicating simple tasks. I created <a href="https://www.npmjs.com/package/bang.html">!</a> (Bang), a minimalist JavaScript view framework that uses <a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">Custom Elements</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/Shadow_DOM">Shadow DOM</a> for scoped CSS, with a novel HTML comment hack for void tags like <code>&lt;!my-input /&gt;</code>. In the web’s Zen garden, ! is a raked pebble path, offering clarity through simplicity.</p>
+      <p>! enables incremental rendering without a virtual DOM, using native templating and Custom Elements, with a unique syntax for void tags.</p>
+      <pre><code>class MyInput extends HTMLElement {
+  constructor() {
+    super();
+    this.attachShadow({ mode: 'open' });
+    this.shadowRoot.innerHTML = `
+      <style>
+        :host { display: inline-block; }
+        input { border: 1px solid #ccc; padding: 5px; }
+      </style>
+      <input type="text" placeholder="Enter text: ${this.state.placeholder}">
+    `;
+  }
+}
+// Register the custom element with comment-based void tag support
+customElements.define('my-input', MyInput);
+// Usage: &lt;!my-input /&gt;
+</code></pre>
+      <p>This code defines a Custom Element with Shadow DOM, using the void tag hack for simplicity. !’s minimalism streamlines UI development.</p>
+      <img src="bang-screenshot.jpg" alt="Bang interface: a Zen garden with minimalistic stones, representing simplicity in UI design">
+      <p>Building ! was like tending a Zen garden, finding peace in simplicity. At <a href="https://dosaygo.com">DOSAYGO</a>, we value clarity, crafting tools that simplify without sacrificing power. ! is a path to serene development, a quiet space for creating UIs.</p>
+    </article>
+  </main>
+  <footer>
+    <p>© 2025 DOSAYGO Studio. <a href="/contact.html">Contact</a></p>
+  </footer>
+</body>
+</html>

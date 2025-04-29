@@ -9,19 +9,19 @@
 </head>
 <body>
   <header>
-    <h1>DOSAYGO Studio</h1>
+    <h1><a href="https://dosaygo.com">DOSAYGO Studio</a></h1>
     <nav>
-      <a href="#home">Home</a>
-      <a href="#posts">Posts</a>
-      <a href="#about">About</a>
+      <a href="/index.html">Home</a>
+      <a href="/posts.html">Posts</a>
+      <a href="/about.html">About</a>
     </nav>
   </header>
   <main>
     <article>
-      <h2>Rain: A Cascade of Primes in the Web’s Steady Flow</h2>
-      <p class="author">By Cris, July 10, 2023</p>
-      <p>In the web’s steady flow, where data courses like a river through the earth’s embrace, I sought a new current—a hash function that could ripple with speed and strength, transforming inputs into outputs as naturally as rain reshapes the land. Rain emerged as a twin cascade, with Rainbow and Rainstorm each carving their own path: Rainbow, a swift stream for statistical strength, and Rainstorm, a deeper torrent aiming for cryptographic resilience. Using 64-bit primes chosen for their avalanche properties, iterated weak functions, and a hybrid design blending cryptographic paradigms, Rain flowed through rigorous SMHasher3 testing, its droplets refined with the help of Frank Wojcik to ensure a steady rhythm, as pure as a river at dawn.</p>
-      <p>The journey began with the primes—64-bit numbers generated with AKS primality tests and secure randomness, their avalanche properties charted through simple multiply-modulo operations, aiming for a 0.5 probability of bit changes across the output. I graphed their distributions, selecting choice primes like pearls from a stream, and wove them into Rainbow’s mixing functions, where they cascaded through XOR, subtraction, and rotation (XSR). Rainstorm, with its 1024-bit state, blended Merkle-Damgård iteration, Feistel-like mixing, and sponge-inspired absorption, iterating a weak function four times to pass SMHasher3’s 238 tests. Beyond the math, Rain became an experiment in harmony—bridging JavaScript and C++ via WebAssembly to create a `rainsum` tool with byte-identical outputs, its undercurrents steadied by Frank’s guidance on undefined behavior and memory alignment, ensuring the flow remained pure.</p>
+      <h2>Rain: Precision Hashing with Primes</h2>
+      <p class="author">By <a href="/about.html#cris">Cris</a>, July 10, 2023</p>
+      <p>Fast, secure hashing is critical for data integrity, yet balancing speed and quality is tough. I addressed this with <a href="https://github.com/DOSAYGO-Research/rain">Rain</a>, a hash function using 64-bit primes and XSR operations to deliver rapid 256-bit and 128-bit hashes, passing <a href="https://github.com/rurban/smhasher">SMHasher3</a> tests. In the web’s digital circuitry, Rain is a precision-engineered chip, pulsing with the rhythm of primes to ensure data flows securely.</p>
+      <p>By using primes with strong avalanche properties, Rain ensures each bit change cascades across the output, enhanced by a <a href="https://webassembly.org/">WebAssembly</a> bridge for consistent JavaScript-C++ outputs.</p>
       <pre><code>static inline void mixA(uint64_t* s) {
   uint64_t a = s[0], b = s[1], c = s[2], d = s[3];
   a *= P; a = ROTR64(a, 23); a *= Q;
@@ -31,13 +31,13 @@
   s[0] = a; s[1] = b; s[2] = c; s[3] = d;
 }
 </code></pre>
-      <p>The code above captures a droplet of Rainbow’s flow—the `mixA` function, where primes like P and Q trigger an avalanche of change, ensuring each bit ripples through the state. Rainstorm’s deeper cascade, with its Feistel-like halves and four-round iteration, aimed for cryptographic strength, while Rainbow prioritized speed with statistical robustness. The WASM-C++ bridge, a joyful dance of isometric design, produced `rainsum` as a testament to harmony across languages, its alignment issues smoothed with Frank Wojcik’s wisdom. Rain became a river of experimentation, its currents blending math and code as naturally as water carves the earth, each drop a step toward understanding the web’s quiet pulse.</p>
-      <img src="rain-screenshot.jpg" alt="Rain in action: a terminal showing `rainsum` outputs in JavaScript and C++, set against a backdrop of a gentle rain over a river at dawn">
-      <p>In crafting Rain, I learned the beauty of nature’s patterns—how primes, like raindrops, can shape the digital world with their steady fall, and how collaboration, like a shared journey, steadies the flow. It stands as a reminder that even in the web’s vast expanse, we can find harmony in experimentation, as natural as the earth’s own cycles. Like a rider tracing a river’s edge at dawn, or a skydiver feeling the rain’s gentle touch, Rain is a cascade of discovery, a testament to the quiet power of blending ideas, its ripples carrying us closer to the world’s endless heartbeat.</p>
+      <p>This <code>mixA</code> function uses primes to trigger bit avalanches, ensuring robust hashing. Rain’s design excels in both speed and quality.</p>
+      <img src="rain-screenshot.jpg" alt="Rain visualization: a circuit board with glowing traces resembling raindrops, symbolizing precision and flow">
+      <p>Building Rain was like designing a microchip, each prime a carefully placed transistor. At <a href="https://dosaygo.com">DOSAYGO</a>, we pursue precision, crafting tools that balance form and function. Rain is a digital cascade, ensuring data integrity with the grace of a well-tuned machine.</p>
     </article>
   </main>
   <footer>
-    <p>© 2025 DOSAYGO Studio. <a href="#contact">Contact</a></p>
+    <p>© 2025 DOSAYGO Studio. <a href="/contact.html">Contact</a></p>
   </footer>
 </body>
 </html>

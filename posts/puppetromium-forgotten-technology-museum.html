@@ -9,19 +9,19 @@
 </head>
 <body>
   <header>
-    <h1>DOSAYGO Studio</h1>
+    <h1><a href="https://dosaygo.com">DOSAYGO Studio</a></h1>
     <nav>
-      <a href="#home">Home</a>
-      <a href="#posts">Posts</a>
-      <a href="#about">About</a>
+      <a href="/index.html">Home</a>
+      <a href="/posts.html">Posts</a>
+      <a href="/about.html">About</a>
     </nav>
   </header>
   <main>
     <article>
-      <h2>Puppetromium: A Whisper in the Web’s Forgotten Library</h2>
-      <p class="author">By Cris, September 22, 2021</p>
-      <p>In the endless stacks of the web’s forgotten library, where lines of code hum like ancient manuscripts, I sought a ghost—a browser that could move without moving, speak without speaking. Puppetromium came to me like a memory of 1987, a time when the digital winds carried simpler songs. I wanted to see how far I could strip it down: no client-side JavaScript, no WebSockets, yet still alive, still interactive, a real-time whisper across the ether. It was a dance with shadows, a challenge to weave something usable from the web’s oldest threads, as if the pages themselves could dream.</p>
-      <p>The first puzzle was the viewport—how to know its size without a single line of JavaScript, as if peering through a fogged window. I turned to CSS @media queries, those quiet sentinels of responsive design, and bent them to a new purpose. By crafting a cascade of queries, each tied to a background image URL, I let the browser whisper its dimensions to the server. The server, a lone librarian in this ghostly library, listened through Puppeteer, adjusting the viewport to match. It was a silent pact, a way to align two worlds without ever breaking the stillness.</p>
+      <h2>Puppetromium: Remote Browser Control with JavaScript</h2>
+      <p class="author">By <a href="/about.html#cris">Cris</a>, September 22, 2021</p>
+      <p>Remote browser control often demands heavy server-side infrastructure, a barrier to simple, direct interaction. I tackled this with <a href="https://github.com/DO-SAY-GO/puppetromium">Puppetromium</a>, using <a href="https://pptr.dev/">Puppeteer</a> and CSS <code>@media</code> queries to create a serverless remote browser, relying on MJPEG streaming and zero client-side JavaScript. In the web’s retro arcade, where neon lights flicker, Puppetromium is a vintage control panel, its dials and switches pulsing with the rhythm of forgotten tech.</p>
+      <p>I used CSS <code>@media</code> queries to detect viewport sizes by triggering specific background image requests, which the server interprets to adjust the browser. MJPEG streams the browser’s view, and forms with iframes handle interactions without JavaScript, a minimalist approach to remote control.</p>
       <pre><code>/* Probing viewport size with @media queries */
 @media screen and (min-width: 400px) and (min-height: 300px) {
   body {
@@ -50,13 +50,13 @@ app.get('/set-viewport-dimensions/width/:width/height/:height/set.png', async (r
   res.send('Viewport set');
 });
 </code></pre>
-      <p>Next came the challenge of seeing—a real-time stream without the crutch of WebSockets. I turned to MJPEG, an ancient stream of motion, like a flickering lantern in a storm. By embedding it in an `<input type="image">`, I captured the viewport’s pulse, each frame a ghostly transmission of the remote browser’s view. But how to interact without reloading the page, without JavaScript’s restless chatter? I leaned on targeted forms and named iframes, relics of the web’s early days, to send commands—click here, type there, scroll down—each action a whisper carried through the shadows, the page unmoved, as if dreaming.</p>
-      <img src="puppetromium-screenshot.jpg" alt="Puppetromium in action: a browser window streaming a webpage via MJPEG, set against a backdrop of a windswept desert under a vast sky">
-      <p>The final piece was the why—a question that lingered like a half-remembered dream. I wanted to constrain myself, to see how simple a remote browser could be and still breathe. Puppetromium, a single Node.js file of 350 lines, became my answer: a browser UI that runs on Puppeteer, served through six endpoints, as light as a sigh. It was a reminder of why I later built BrowserBox, a more robust traveler on this road, but also a spark for others—a permissive gift to those who might wander this library and dream their own dreams. In its stillness, Puppetromium hums, a quiet melody of what the web once was, and what it might still become.</p>
+      <p>This code uses <code>@media</code> queries to detect the viewport and Puppeteer to adjust it, a clever hack that keeps the client silent. Puppetromium’s simplicity is its charm, a nod to the web’s early days.</p>
+      <img src="puppetromium-screenshot.jpg" alt="Puppetromium interface: a retro control panel with dials and switches, set against a digital web background, showing a browser tab being controlled remotely">
+      <p>Building Puppetromium was like restoring a vintage arcade machine, each switch a reminder of simpler times. At <a href="https://dosaygo.com">DOSAYGO</a>, we value this nostalgic ingenuity, crafting tools that empower with minimal complexity. Puppetromium is a playful relic, inviting developers to rediscover the joy of direct, unencumbered control.</p>
     </article>
   </main>
   <footer>
-    <p>© 2025 DOSAYGO Studio. <a href="#contact">Contact</a></p>
+    <p>© 2025 DOSAYGO Studio. <a href="/contact.html">Contact</a></p>
   </footer>
 </body>
 </html>

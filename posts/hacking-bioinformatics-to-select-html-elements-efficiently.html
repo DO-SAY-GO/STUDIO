@@ -9,19 +9,19 @@
 </head>
 <body>
   <header>
-    <h1>DOSAYGO Studio</h1>
+    <h1><a href="https://dosaygo.com">DOSAYGO Studio</a></h1>
     <nav>
-      <a href="#home">Home</a>
-      <a href="#posts">Posts</a>
-      <a href="#about">About</a>
+      <a href="/index.html">Home</a>
+      <a href="/posts.html">Posts</a>
+      <a href="/about.html">About</a>
     </nav>
   </header>
   <main>
     <article>
-      <h2>Selector Generalization: Tracing the Web’s Silent Constellations</h2>
-      <p class="author">By Cris, January 1, 2013</p>
-      <p>In the stillness of a new year, I stood at the edge of the web’s vast lattice, where elements flicker like stars in a forgotten sky. I wanted to touch them—not with rigid selectors, but with a gesture, a whisper of intent. Selector Generalization emerged like a dream half-remembered, a hack that borrowed the language of life’s deepest patterns: a bioinformatics algorithm for aligning DNA, reshaped to align the DOM’s own strands. By clicking a few examples, I could trace the web’s silent constellations, revealing families of elements as if the page were a living thing, its connections humming beneath the surface, waiting to be seen.</p>
-      <p>The first challenge was to map the page’s hidden structure—a canonical path for each element, as unique as a genetic fingerprint. I walked each node upward to the root, noting its tag, classes, IDs, and position among siblings, like a traveler counting stars to find their place. The `get_canonical_path` function became my compass, transforming a DOM element into a sequence of levels, each a set of traits—tags, geometry, classes, IDs—marked with a code to track its depth. This path was the element’s essence, a strand of its digital DNA, ready to be compared with others in a dance of alignment.</p>
+      <h2>Selector Generalization: Bioinformatics for Web Scraping</h2>
+      <p class="author">By <a href="/about.html#cris">Cris</a>, January 1, 2013</p>
+      <p>Selecting related elements across diverse web pages is a puzzle, often requiring manual CSS selector crafting. I solved this with <a href="https://github.com/DO-SAY-GO/selector-generalization">Selector Generalization</a>, adapting the <a href="https://en.wikipedia.org/wiki/Needleman%E2%80%93Wunsch_algorithm">Needleman-Wunsch algorithm</a> from bioinformatics to align DOM trees and generate generalized selectors from user clicks. In the web’s tangled forest, where each page is a unique organism, this project is a genetic map, tracing patterns to reveal hidden connections.</p>
+      <p>By clicking example elements, users provide the algorithm with “DNA” to align, producing a selector that captures all similar elements. The process starts by mapping each element’s DOM path into a canonical sequence, then aligning these sequences to find common patterns.</p>
       <pre><code>path_lcs.get_canonical_path(node) {
   const path = [];
   const canonical_path = [];
@@ -71,13 +71,13 @@
   return {canonical: canonical_path};
 }
 </code></pre>
-      <p>With paths in hand, the next puzzle was to find their shared patterns—a longest common subsequence (LCS) that could generalize across examples. I adapted the Needleman-Wunsch algorithm, scoring each pair of paths for similarity, much like aligning DNA strands to find kinship. The `lcs_from_canonical_path_pair` function compared paths level by level, measuring their intersection against their union, as if weighing the light of overlapping stars. From this, I built a selector, stitching together tags, classes, and geometry into a CSS rule that captured the family of elements, whether they were tabs, accordions, or links in a demo page—a constellation revealed with a single click.</p>
-      <img src="selector-generalization-screenshot.jpg" alt="Selector Generalization in action: a demo page with a control panel showing selected elements highlighted, set against a backdrop of a starry night sky">
-      <p>Selector Generalization was a bridge across realms—biology’s patterns meeting the web’s structure, a quiet act of seeing the unseen. The demo page, with its tabs and forms, became a canvas to test this magic, letting users mark examples and watch the page hum with recognition. It was a reminder that the web, like life, is woven from hidden threads, waiting for a gentle touch to reveal its order. In its surreal simplicity, this project felt like a skydiver glimpsing the earth’s veins, or a rider tracing constellations across a desert night—a fleeting moment where the infinite felt within reach.</p>
+      <p>This code maps an element’s DOM path into a canonical sequence, a key step in aligning elements to generate selectors. Selector Generalization’s interdisciplinary leap makes web scraping intuitive, as if decoding a genome to find common traits.</p>
+      <img src="selector-generalization-screenshot.jpg" alt="Selector Generalization interface: a DNA double helix morphing into a DOM tree, with highlighted web elements on a page">
+      <p>Creating Selector Generalization showed me the power of cross-disciplinary thinking. Like a scientist peering through a microscope, I found clarity in unexpected parallels. At <a href="https://dosaygo.com">DOSAYGO</a>, we embrace such curiosity, blending fields to craft tools that surprise and delight. This project is a bridge between biology and code, inviting developers to explore the web’s structure with a biologist’s eye.</p>
     </article>
   </main>
   <footer>
-    <p>© 2025 DOSAYGO Studio. <a href="#contact">Contact</a></p>
+    <p>© 2025 DOSAYGO Studio. <a href="/contact.html">Contact</a></p>
   </footer>
 </body>
 </html>

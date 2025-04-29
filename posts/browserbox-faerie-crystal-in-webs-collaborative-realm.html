@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOSAYGO Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../theme.css">
+</head>
+<body>
+  <header>
+    <h1><a href="https://dosaygo.com">DOSAYGO Studio</a></h1>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/posts.html">Posts</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </header>
+  <main>
+    <article>
+      <h2>BrowserBox: Secure Remote Browser for Apps</h2>
+      <p class="author">By <a href="/about.html#cris">Cris</a>, October 1, 2018</p>
+      <p>Embedding secure browsing in apps risks exposing users to web threats. I addressed this with <a href="https://github.com/BrowserBox/BrowserBox">BrowserBox</a>, a remote browser isolation (RBI) solution using the <a href="https://chromedevtools.github.io/devtools-protocol/">Chrome DevTools Protocol (CDP)</a> and <a href="https://webrtc.org/">WebRTC</a> for secure, real-time collaboration, embeddable via a custom element. In the web’s cosmic network, BrowserBox is a starship, shielding users while navigating the digital void.</p>
+      <p>A WebSocket server manages connections, CDP controls the remote browser, and WebRTC streams events for collaboration, with RBI ensuring security.</p>
+      <pre><code>wss.on('connection', async (ws, req) => {
+  const connectionId = Math.random().toString(36) + (+new Date).toString(36);
+  const validAuth = req.headers.cookie?.includes(`${COOKIENAME+port}=${allowed_user_cookie}`);
+  if (validAuth) {
+    await zl.act.addLink({so, forceMeta}, {connectionId, socket: ws}, zombie_port);
+    let peer = new Peer({ wrtc: WRTC, initiator: true });
+    peer.on('signal', data => so(ws, {copeer: {signal: data}}));
+    peer.on('connect', () => zl.act.addLink({so, forceMeta}, {connectionId, peer, socket: ws}, zombie_port));
+    ws.on('message', message => {
+      const { copeer, zombie } = JSON.parse(message);
+      if (copeer) peer.signal(copeer.signal);
+      if (zombie) eventSendLoop(zombie.events, { Data: [], Frames: [], Meta: [], State: {}, connectionId });
+    });
+  } else {
+    ws.close();
+  }
+});
+</code></pre>
+      <p>This code sets up WebSocket-WebRTC collaboration, while CDP commands control the browser, ensuring secure, isolated browsing.</p>
+      <img src="browserbox-screenshot.jpg" alt="BrowserBox interface: a glowing crystal orb with interconnected nodes, set in a moonlit glade">
+      <p>Building BrowserBox was like piloting a starship, navigating threats with precision. At <a href="https://dosaygo.com">DOSAYGO</a>, we value security and collaboration, crafting tools that protect while connecting. BrowserBox is a cosmic vessel, guiding users safely through the web’s expanse.</p>
+    </article>
+  </main>
+  <footer>
+    <p>© 2025 DOSAYGO Studio. <a href="/contact.html">Contact</a></p>
+  </footer>
+</body>
+</html>

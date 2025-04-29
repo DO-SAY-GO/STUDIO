@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOSAYGO Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../theme.css">
+</head>
+<body>
+  <header>
+    <h1>DOSAYGO Studio</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#posts">Posts</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+  <main>
+    <article>
+      <h2>Devtoolium: A Lantern in the Browser’s Hidden Pathways</h2>
+      <p class="author">By Cris, September 22, 2021</p>
+      <p>Deep within the browser’s hidden pathways, where Chrome DevTools casts light on the web’s inner workings, I sought to guide developers safely—a secure bridge for remote debugging, shielding the browser’s core from the wild winds of the internet. Devtoolium emerged as a hack that wove an authentication proxy into the Chrome DevTools Protocol (CDP), wrapping the DevTools front-end in a protective embrace to ensure only trusted travelers could explore its depths. It was a quiet act of care, a lantern-lit trail for developers to navigate the web’s undergrowth, as naturally as the earth’s secret paths glow at dusk.</p>
+      <p>The challenge was to secure the CDP, a powerful yet vulnerable gateway, while keeping the debugging journey seamless. I built a Node.js server to intercept WebSocket connections, enforcing token-based authentication with secure cookies, ensuring only those with the right key—generated as a random hex token—could pass. The proxy, running over HTTPS with SSL certificates, forwarded commands to the CDP only after validation, while custom front-end logic replaced `chrome://newtab` URLs and polyfilled `CSSStyleSheet` to smooth compatibility. This shield allowed remote debugging to flow safely, its pathways protected as steadily as roots anchor a forest trail, illuminating the browser’s hidden realms for developers without fear of intrusion.</p>
+      <pre><code>const wss = new WebSocket.Server({ server });
+wss.on('connection', (ws, req) => {
+  const cookie = req.headers.cookie;
+  const authorized = cookie && cookie.includes(`${COOKIENAME+SERVER_PORT}=${COOKIE}`);
+  if (authorized) {
+    const url = `ws://localhost:${CHROME_PORT}${req.url}`;
+    const crdpSocket = new WebSocket(url);
+    SOCKETS.set(ws, crdpSocket);
+    ws.on('message', msg => crdpSocket.send(msg));
+    crdpSocket.on('message', msg => ws.send(msg));
+    ws.on('close', () => crdpSocket.close(1001, 'client disconnected'));
+    crdpSocket.on('close', () => ws.close(1011, 'browser disconnected'));
+  } else {
+    ws.send(JSON.stringify({error: 'Not authorized'}));
+    ws.close();
+  }
+});
+</code></pre>
+      <p>The code above captures Devtoolium’s steady glow—a WebSocket proxy that guards the CDP with cookie-based authentication, a lantern ensuring safe passage for remote debugging commands. The innovation lay in its protective embrace: intercepting connections with a Node.js server, validating access with secure tokens, and enhancing compatibility by polyfilling `CSSStyleSheet` and redirecting `chrome://newtab` URLs. HTTPS with SSL certificates added a layer of trust, while the proxy’s simplicity created a seamless bridge, as naturally as a trail winds through a forest, lighting the way for developers to explore the web’s depths with confidence.</p>
+      <img src="devtoolium-screenshot.jpg" alt="Devtoolium in action: a remote debugging session in Chrome DevTools, set against a backdrop of a forest trail lit by lanterns at dusk">
+      <p>In crafting Devtoolium, I learned the beauty of hidden pathways—how the browser’s depths can be illuminated with care, offering developers a safe journey through the web’s undergrowth. It stands as a reminder that even in the web’s vast expanse, we can forge secure trails, as natural as the earth’s own contours. Like a rider following a lantern-lit path at dusk, or a skydiver glimpsing trails below, Devtoolium is a testament to the power of exploration, a quiet guide that lights the way, carried forward on the web’s endless journey.</p>
+    </article>
+  </main>
+  <footer>
+    <p>© 2025 DOSAYGO Studio. <a href="#contact">Contact</a></p>
+  </footer>
+</body>
+</html>

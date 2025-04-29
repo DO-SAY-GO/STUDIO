@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STUDIO by DOSAYGO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../theme.css">
+</head>
+<body>
+  <header>
+    <h1><a href="https://dosaygo.com">STUDIO by DOSAYGO</a></h1>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/posts.html">Posts</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </header>
+  <main>
+    <article>
+      <h2>BattleSpace Telemetry: Device Sensors in the Web’s Cosmos</h2>
+      <p class="author">By <a href="/about.html#cris">Cris</a>, November 7, 2023</p>
+      <p>The web’s cosmos holds unseen signals—data from devices that whisper their state, their location, their connections, yet accessing this telemetry can be a voyage through uncharted stars. I embarked on this journey with <a href="https://github.com/o0101/battlespace-telemetry">BattleSpace Telemetry</a>, an experiment to surface a constellation of sensor data available in the browser, revealing the web’s hidden reach. In the digital expanse, where each device is a distant star, this project is a sci-fi dashboard, mapping the unseen with the precision of a navigator charting the night sky.</p>
+      <p>I built a suite of sensors—connectivity, geolocation, battery, device motion, orientation, and more—displaying their data in a structured JSON format within a textarea. Connectivity reveals network details like effective type and downlink speed, geolocation pinpoints the user’s place on the planet, battery shows charging status and level, while motion and orientation capture the device’s movements, all unified in a client-side demo that runs entirely offline for privacy.</p>
+      <pre><code>async function collectSensorData() {
+  const sensors = {};
+  
+  // Connectivity
+  sensors.connectivity = {
+    online: navigator.onLine,
+    connection: {
+      effectiveType: navigator.connection?.effectiveType,
+      downlink: navigator.connection?.downlink + " Mbps",
+      rtt: navigator.connection?.rtt + " ms",
+      saveData: navigator.connection?.saveData
+    },
+    $timestamp: Date.now()
+  };
+  
+  // Battery
+  const battery = await navigator.getBattery();
+  sensors.battery = {
+    charging: battery.charging,
+    level: battery.level,
+    chargingTime: battery.chargingTime,
+    dischargingTime: battery.dischargingTime,
+    $timestamp: Date.now()
+  };
+  
+  // Geolocation
+  sensors.geolocation = await new Promise(resolve => {
+    navigator.geolocation.getCurrentPosition(
+      position => resolve({
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+        accuracy: position.coords.accuracy,
+        deviceTimezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        deviceTimeNow: new Date().toString(),
+        $timestamp: Date.now()
+      }),
+      error => resolve({ error: error.message, $timestamp: Date.now() })
+    );
+  });
+  
+  return sensors;
+}
+</code></pre>
+      <p>This code collects data from connectivity, battery, and geolocation sensors, formatting it as a JSON object with timestamps, mirroring the output in a textarea. BattleSpace Telemetry’s simplicity reveals the web’s vast reach, a constellation of data points illuminating the browser’s capabilities without external calls, ensuring privacy as a core principle.</p>
+      <img src="battlespace-telemetry-screenshot.jpg" alt="BattleSpace Telemetry interface: a sci-fi dashboard with sensor data displayed in a textarea, set against a backdrop of a starry cosmos">
+      <p>Building BattleSpace Telemetry was like gazing through a telescope, each sensor a star brought into focus. At <a href="https://dosaygo.com">DOSAYGO</a>, we value exploration, crafting tools that reveal the unseen with clarity. This project is a celestial map, guiding us through the web’s cosmos with a navigator’s quiet wonder.</p>
+    </article>
+  </main>
+  <footer>
+    <p>© 2025 DOSAYGO Studio. <a href="/contact.html">Contact</a></p>
+  </footer>
+</body>
+</html>

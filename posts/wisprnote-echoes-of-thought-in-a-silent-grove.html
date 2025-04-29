@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOSAYGO Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../theme.css">
+</head>
+<body>
+  <header>
+    <h1>DOSAYGO Studio</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#posts">Posts</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+  <main>
+    <article>
+      <h2>WisprNote: Echoes of Thought in a Silent Grove</h2>
+      <p class="author">By Cris, February 22, 2023</p>
+      <p>In the web’s silent grove, where voices weave stories through the air—lectures, meetings, interviews, voice notes—I sought to capture their echoes for creatives, writers, journalists, and students, turning spoken thoughts into crisp, clean text with ease. WisprNote emerged as a paid app on the Mac App Store, a personal dictation assistant that transcribes audio and video in any common format, weaving silence detection with Silero VAD, FFmpeg, and OpenAI’s Whisper models into a seamless flow, delivering fast, high-quality, offline transcription. It was a labor of joy, a space where ideas could be spoken and preserved, as naturally as whispers linger in a still forest, their secrets held close to the earth.</p>
+      <p>The path was paved with challenges: Whisper models often hallucinated in silence, and long audio files delayed the first transcribed words. I carved silence with Silero VAD, splicing out quiet sections to banish hallucinations, then chunked audio into short segments at word boundaries—brief pauses—feeding each with prior transcript context to ensure clarity, a steady stream of text at 50–200 words per second, a speedup over real-time. FFmpeg and Core Audio captured and processed the voice, while the devops challenge of packaging FFmpeg, bash scripts, and models for the App Store—navigating entitlements and signing—was a marvelous feat, a dance of persistence that brought WisprNote to life, its offline design a promise of privacy as gentle as the grove’s protective shade.</p>
+      <pre><code># Bash script snippet for WisprNote transcription
+speech_file="${output_dir}/output.wav"
+"$tvad" "$wav_file" "$vad_model"  # Silero VAD to remove silence
+"$ffmpeg" -y -i "$speech_file" -acodec pcm_s16le -ar 16000 -ac 1 "$wav_file"  # Re-encode for Whisper
+"$whisper" -m "$model" -otxt -of "$wav_file" "$speech_file"  # Transcribe with Whisper
+</code></pre>
+      <p>The script above captures WisprNote’s gentle flow—using Silero VAD to splice silence, FFmpeg to prepare audio, and Whisper to transcribe, a rhythm as steady as a stream’s quiet song. The innovation lay in its clarity: chunking audio at word boundaries banished delays, while context from prior transcripts ensured accuracy, a seamless whisper of speech to text. The offline design guarded privacy, and the devops triumph—packaging FFmpeg, scripts, and models for the App Store—brought it to users, a joyful collaboration with ChatGPT as I learned Objective-C, crafting a sanctuary where voices could be captured and kept, as naturally as echoes linger in a forest grove.</p>
+      <img src="wisprnote-screenshot.jpg" alt="WisprNote in action: a Mac screen showing transcribed voice notes, set against a backdrop of a quiet forest grove at dawn">
+      <p>In crafting WisprNote, I discovered the beauty of listening—how technology can preserve whispers with care, turning fleeting echoes into lasting words without breaking their trust. It stands as a reminder that even in the web’s vast expanse, we can create havens of privacy, as natural as the earth’s own stillness. Like a rider pausing to hear the wind’s soft song, or a skydiver catching whispers in the air, WisprNote is a testament to the power of innovation, a gentle keeper of thoughts that ripple through the silence, carried forward on the web’s endless journey.</p>
+    </article>
+  </main>
+  <footer>
+    <p>© 2025 DOSAYGO Studio. <a href="#contact">Contact</a></p>
+  </footer>
+</body>
+</html>

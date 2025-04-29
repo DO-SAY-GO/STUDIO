@@ -1,6 +1,6 @@
-/* DOSAYGO Studio Theme - July 2025 Forecast */
+/* STUDIO by DOSAYGO Theme - April 2025 Forecast */
 /* Inspired by open roads, boundless skies, and Contemplative Harmony voice */
-/* Palette: Saddle Brown (#4A2C0F), Sky Blue (#A3CFFA), Dusk Purple (#5B3A6B), Brass (#B89778), Ember (#D9663A) */
+/* Palette: Saddle Brown (#4A2C0F), Pale Sky (#E6E7F0), Dusk Purple (#2B1A3D), Brass (#B89778), Ember (#D9663A), Muted Blue (#5A7CA3) */
 /* Typography: Variable font 'Roboto Flex' for rugged elegance, fallback to sans-serif */
 
 /* Reset and Base Styles */
@@ -14,28 +14,28 @@ body {
   font-family: 'Roboto Flex', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 18px;
   line-height: 1.6;
-  color: #4A2C0F;
-  background: #A3CFFA;
+  color: #5A7CA3; /* Muted Blue for body text, aligning with screenshot */
+  background: #E6E7F0; /* Pale Sky for a serene backdrop, matching screenshot */
   transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
   body {
-    background: #2B1A3D;
-    color: #A3CFFA;
+    background: #2B1A3D; /* Dusk Purple, matching screenshot header */
+    color: #A3CFFA; /* Sky Blue for contrast in dark mode */
   }
 }
 
 /* Header */
 header {
-  background: linear-gradient(135deg, #A3CFFA 0%, #D9C7A8 100%);
+  background: linear-gradient(135deg, #2B1A3D 0%, #B89778 100%); /* Dusk Purple to Brass, evoking a twilight sky */
   padding: 1.5rem;
   text-align: center;
   position: sticky;
   top: 0;
   z-index: 10;
-  border-bottom: 2px solid #D9663A;
+  border-bottom: 2px solid #D9663A; /* Ember for a warm accent */
   transition: background 0.3s ease, opacity 0.3s ease;
 }
 
@@ -53,7 +53,7 @@ header {
 header h1 {
   font-size: 2rem;
   font-variation-settings: 'wght' 700;
-  color: #4A2C0F;
+  color: #4A2C0F; /* Saddle Brown for warmth and contrast */
   text-transform: uppercase;
   letter-spacing: 0.1em;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
@@ -64,7 +64,7 @@ nav {
 }
 
 nav a {
-  color: #4A2C0F;
+  color: #D9E6FF; /* Light grayish-blue from screenshot for nav links */
   text-decoration: none;
   margin: 0 1rem;
   font-variation-settings: 'wght' 500;
@@ -72,8 +72,13 @@ nav a {
 }
 
 nav a:hover {
-  color: #D9663A;
+  color: #D9663A; /* Ember for a warm hover effect */
   transform: scale(1.1);
+}
+
+nav a:focus {
+  outline: 2px solid #D9663A; /* Ember for focus visibility */
+  outline-offset: 2px;
 }
 
 /* Main Content */
@@ -84,7 +89,7 @@ main {
 }
 
 article {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.85); /* Frosted glass effect, matching screenshot */
   border-radius: 1rem;
   padding: 2.5rem;
   box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
@@ -96,8 +101,15 @@ article {
 article h2 {
   font-size: 2.2rem;
   font-variation-settings: 'wght' 600;
-  color: #4A2C0F;
+  color: #4A2C0F; /* Saddle Brown for headings, matching screenshot */
   margin-bottom: 1.5rem;
+}
+
+article h3 {
+  font-size: 1.6rem;
+  font-variation-settings: 'wght' 500;
+  color: #4A2C0F; /* Saddle Brown for subheadings */
+  margin: 1.5rem 0 0.5rem;
 }
 
 article p {
@@ -105,10 +117,29 @@ article p {
   text-align: justify;
 }
 
+article ul {
+  list-style-type: none;
+  margin-bottom: 1.5rem;
+}
+
+article ul li {
+  margin-bottom: 1rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+article ul li:before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #D9663A; /* Ember for bullet points */
+  font-size: 1.2rem;
+}
+
 /* Author Info */
 .author {
   font-style: italic;
-  color: #5B3A6B;
+  color: #5B3A6B; /* Dusk Purple for a subtle accent */
   margin-bottom: 1.5rem;
   font-size: 0.95rem;
 }
@@ -120,7 +151,7 @@ img {
   max-width: 600px;
   height: auto;
   margin: 1.5rem auto;
-  border: 3px solid #B89778;
+  border: 3px solid #B89778; /* Brass for a warm, grounding border */
   border-radius: 0.5rem;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
@@ -130,27 +161,46 @@ img::before {
   display: block;
   text-align: center;
   padding: 1rem;
-  background: #5B3A6B;
-  color: #A3CFFA;
+  background: #5B3A6B; /* Dusk Purple for placeholder background */
+  color: #A3CFFA; /* Sky Blue for placeholder text */
   font-size: 0.9rem;
 }
 
 /* Code Blocks */
 pre {
   font-family: 'Courier New', monospace;
-  background: #3A2A4A;
+  background: #3A2A4A; /* Darker purple for code blocks, inspired by terminal aesthetics */
   padding: 1.2rem;
   border-radius: 0.5rem;
   margin: 1.5rem 0;
-  border-left: 4px solid #D9663A;
+  border-left: 4px solid #D9663A; /* Ember for a warm accent */
   box-sizing: border-box;
+  position: relative;
+  overflow-x: auto;
 }
 
 code {
   line-height: 1.6;
   white-space: pre-wrap;
   word-break: break-word;
-  color: #D9E6FF;
+  color: #D9E6FF; /* Light grayish-blue for code text, matching screenshot */
+}
+
+/* Retro CRT Scanline Effect on Hover */
+pre:hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    transparent 0%,
+    transparent 2px,
+    rgba(0, 0, 0, 0.05) 2px,
+    rgba(0, 0, 0, 0.05) 4px
+  );
+  pointer-events: none;
 }
 
 /* Micro-Animations for Adventure Vibe */
@@ -187,19 +237,24 @@ article:hover::before {
 footer {
   text-align: center;
   padding: 2rem;
-  background: #4A2C0F;
-  color: #A3CFFA;
+  background: #4A2C0F; /* Saddle Brown for a grounded footer */
+  color: #A3CFFA; /* Sky Blue for contrast */
   font-size: 0.9rem;
 }
 
 footer a {
-  color: #D9663A;
+  color: #D9663A; /* Ember for links */
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 footer a:hover {
-  color: #B89778;
+  color: #B89778; /* Brass for hover effect */
+}
+
+footer a:focus {
+  outline: 2px solid #D9663A; /* Ember for focus visibility */
+  outline-offset: 2px;
 }
 
 /* Responsive Design */
@@ -221,7 +276,40 @@ footer a:hover {
     font-size: 1.6rem;
   }
 
+  article h3 {
+    font-size: 1.4rem;
+  }
+
   img {
     max-width: 100%;
   }
+}
+
+/* Accessibility Enhancements */
+:focus {
+  outline: 2px solid #D9663A; /* Ember for focus outlines */
+  outline-offset: 2px;
+}
+
+/* Ensure sufficient contrast for WCAG compliance */
+@media (prefers-color-scheme: dark) {
+  article {
+    background: rgba(43, 26, 61, 0.85); /* Darker Dusk Purple for dark mode articles */
+    color: #A3CFFA; /* Sky Blue for readability */
+  }
+
+  article h2,
+  article h3 {
+    color: #D9E6FF; /* Light grayish-blue for headings in dark mode */
+  }
+
+  article ul li:before {
+    color: #D9663A; /* Ember remains consistent */
+  }
+}
+
+a, a:visited, a:hover, a:focused, a:link, a:active {
+  color: hotpink;                       !important;
+  font-weight: bold;                    !important;
+  text-decoration: underline;           !important;
 }

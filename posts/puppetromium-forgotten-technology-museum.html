@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOSAYGO Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../theme.css">
+</head>
+<body>
+  <header>
+    <h1>DOSAYGO Studio</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#posts">Posts</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+  <main>
+    <article>
+      <h2>Puppetromium: A Whisper in the Web’s Forgotten Library</h2>
+      <p class="author">By Cris, September 22, 2021</p>
+      <p>In the endless stacks of the web’s forgotten library, where lines of code hum like ancient manuscripts, I sought a ghost—a browser that could move without moving, speak without speaking. Puppetromium came to me like a memory of 1987, a time when the digital winds carried simpler songs. I wanted to see how far I could strip it down: no client-side JavaScript, no WebSockets, yet still alive, still interactive, a real-time whisper across the ether. It was a dance with shadows, a challenge to weave something usable from the web’s oldest threads, as if the pages themselves could dream.</p>
+      <p>The first puzzle was the viewport—how to know its size without a single line of JavaScript, as if peering through a fogged window. I turned to CSS @media queries, those quiet sentinels of responsive design, and bent them to a new purpose. By crafting a cascade of queries, each tied to a background image URL, I let the browser whisper its dimensions to the server. The server, a lone librarian in this ghostly library, listened through Puppeteer, adjusting the viewport to match. It was a silent pact, a way to align two worlds without ever breaking the stillness.</p>
+      <pre><code>/* Probing viewport size with @media queries */
+@media screen and (min-width: 400px) and (min-height: 300px) {
+  body {
+    background-image: url("/set-viewport-dimensions/width/400/height/300/set.png");
+  }
+}
+@media screen and (min-width: 800px) and (min-height: 600px) {
+  body {
+    background-image: url("/set-viewport-dimensions/width/800/height/600/set.png");
+  }
+}
+
+/* Server-side handler to set viewport */
+app.get('/set-viewport-dimensions/width/:width/height/:height/set.png', async (req, res) => {
+  const ua = req.headers['user-agent'];
+  const isMobile = testMobile(ua);
+  let {width, height} = req.params;
+
+  width = parseFloat(width);
+  height = parseFloat(height);
+
+  await page.emulate({
+    viewport: { width, height, isMobile },
+    userAgent: ua
+  });
+  res.send('Viewport set');
+});
+</code></pre>
+      <p>Next came the challenge of seeing—a real-time stream without the crutch of WebSockets. I turned to MJPEG, an ancient stream of motion, like a flickering lantern in a storm. By embedding it in an `<input type="image">`, I captured the viewport’s pulse, each frame a ghostly transmission of the remote browser’s view. But how to interact without reloading the page, without JavaScript’s restless chatter? I leaned on targeted forms and named iframes, relics of the web’s early days, to send commands—click here, type there, scroll down—each action a whisper carried through the shadows, the page unmoved, as if dreaming.</p>
+      <img src="puppetromium-screenshot.jpg" alt="Puppetromium in action: a browser window streaming a webpage via MJPEG, set against a backdrop of a windswept desert under a vast sky">
+      <p>The final piece was the why—a question that lingered like a half-remembered dream. I wanted to constrain myself, to see how simple a remote browser could be and still breathe. Puppetromium, a single Node.js file of 350 lines, became my answer: a browser UI that runs on Puppeteer, served through six endpoints, as light as a sigh. It was a reminder of why I later built BrowserBox, a more robust traveler on this road, but also a spark for others—a permissive gift to those who might wander this library and dream their own dreams. In its stillness, Puppetromium hums, a quiet melody of what the web once was, and what it might still become.</p>
+    </article>
+  </main>
+  <footer>
+    <p>© 2025 DOSAYGO Studio. <a href="#contact">Contact</a></p>
+  </footer>
+</body>
+</html>

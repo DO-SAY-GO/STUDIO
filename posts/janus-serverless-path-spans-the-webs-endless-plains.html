@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOSAYGO Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../theme.css">
+</head>
+<body>
+  <header>
+    <h1>DOSAYGO Studio</h1>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#posts">Posts</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
+  <main>
+    <article>
+      <h2>Janus: A Serverless Path Across the Web’s Endless Plains</h2>
+      <p class="author">By Cris, November 13, 2023</p>
+      <p>The web rolls out like an endless plain, its horizons shimmering with the promise of connection, yet often bound by the weight of servers and their steady hum. I dreamed of a lighter path—a truly serverless bridge where two travelers, each holding a static HTML page, could meet and share stories over WebRTC’s delicate threads. Janus became that path, a hack that turned my terminal into a silent guide, using Chromium headless as a reverse proxy to serve content, and GitHub Issues as a negotiation channel. It was a journey of whispers, where blog posts and chats flowed like campfire tales, carried on the wind of peer-to-peer magic.</p>
+      <p>The first challenge was the bridge itself—bridging two static HTML pages with no server to lean on. I ran a local script in my terminal, launching Chromium headless to load one HTML page, while the other lived on GitHub Pages, open in a user’s browser. WebRTC needed signaling, a handshake to connect these two, but GitHub Issues became my courier, ferrying offers and answers as JSON payloads in comments, a slow but steady dance across the plains. To make this handshake endure GitHub’s delays, I stretched SimplePeer’s channel timeout to 10 seconds, giving the connection time to bloom. From there, the terminal whispered chats and shared blog posts—tales of UFOs and cooking—directly to the client, a serverless exchange as natural as the earth’s quiet rhythm.</p>
+      <pre><code>async function beginConnectionProcess(postComment, ghUsername, issueNumber) {
+  let peer = new SimplePeer({ 
+    initiator: true, 
+    trickle: false,
+    channelConfig: { ordered: true, maxRetransmits: 0 }
+  });
+  clients[ghUsername] = peer;
+
+  peer.on('signal', data => {
+    postComment(data); // Post offer as a GitHub Issue comment
+  });
+
+  peer.on('connect', async () => {
+    console.log('New client connected!', ghUsername);
+    peer.send(JSON.stringify({type: 'chat', msg: `Hello @${ghUsername}! Welcome to my personal P2P server!`}));
+    peer.send(JSON.stringify({type: 'blog', content: document.querySelector('section#blog').outerHTML}));
+  });
+
+  peer.on('data', data => {
+    const message = JSON.parse(data.toString());
+    if (message.type === 'chat') {
+      console.log(`CHAT_MSG [${ghUsername}]: ${message.msg}`);
+    }
+  });
+}
+</code></pre>
+      <p>The code above captures Janus’s gentle ingenuity—a terminal script that uses Chromium to host one peer, negotiates via GitHub Issues, and shares stories over WebRTC. The innovation lay in its simplicity: Chromium headless acted as a reverse proxy, serving content locally without a server, while GitHub Issues carried the handshake across the web’s vast expanse. The timeout tweak, hidden in SimplePeer’s depths, ensured the connection held, a patient traveler waiting for its companion. Janus became a shared journey, where two HTML pages met to exchange whispers and blog posts, as if pausing by a campfire on the web’s wide plains, finding home in the stories they shared.</p>
+      <img src="janus-screenshot.jpg" alt="Janus in action: a terminal window chatting with a GitHub Pages interface, sharing blog posts, set against a backdrop of a windswept plain at twilight">
+      <p>In crafting Janus, I found the beauty of the serverless—a path where the web’s own currents could carry us, unburdened by traditional ties. It stands as a reminder that even in the vastness, we can meet as travelers, sharing tales of wonder and discovery, grounded by the earth’s steady pulse. Like a rider tracing the horizon at dusk, or a skydiver feeling the wind’s embrace, Janus weaves a connection as fleeting and precious as a story told beneath the stars, a testament to the web’s endless possibilities.</p>
+    </article>
+  </main>
+  <footer>
+    <p>© 2025 DOSAYGO Studio. <a href="#contact">Contact</a></p>
+  </footer>
+</body>
+</html>

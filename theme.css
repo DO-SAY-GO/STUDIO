@@ -1,7 +1,7 @@
 /* STUDIO by DOSAYGO Theme - April 2025 Forecast */
-/* Inspired by contemporary art, modern architecture, and corporate elegance, rooted in contemplative harmony */
-/* Palette: Ink Black (#1A1A1A), Marble White (#F5F5F5), Graphite Gray (#2A2A2A), Polished Steel (#B0BEC5), Neon Coral (#FF6F61), Canvas Blue (#4A90E2) */
-/* Typography: 'Inter' for modern professionalism, 'Playfair Display' for artistic headings, fallbacks to sans-serif/serif */
+/* Blends corporate elegance, contemporary art, and adventurous spirit */
+/* Palette: Obsidian Black (#121212), Ivory White (#F8F9FA), Sage Green (#8A9A86), Vibrant Coral (#FF5E62), Teal Sky (#26A69A), Polished Silver (#D0D4D8) */
+/* Typography: 'Inter' for modern clarity, 'Playfair Display' for artistic headings, fallbacks to sans-serif/serif */
 
 /* Reset and Base Styles */
 * {
@@ -14,32 +14,32 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 18px;
   line-height: 1.7;
-  color: #4A90E2; /* Canvas Blue for body text */
-  background: #F5F5F5; /* Marble White for a gallery-like backdrop */
+  color: #121212; /* Obsidian Black for body text */
+  background: #F8F9FA; /* Ivory White for a clean, gallery-like backdrop */
   transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
   body {
-    background: #2A2A2A; /* Graphite Gray for a sleek dark mode */
-    color: #B0BEC5; /* Polished Steel for contrast */
+    background: #121212; /* Obsidian Black for a sleek dark mode */
+    color: #D0D4D8; /* Polished Silver for contrast */
   }
 }
 
 /* Header */
 header {
-  background: linear-gradient(135deg, #2A2A2A 0%, #B0BEC5 50%, #2A2A2A 100%); /* Graphite Gray to Polished Steel, a modern architectural gradient */
-  padding: 1.5rem;
+  background: linear-gradient(135deg, #121212 0%, #26A69A 100%); /* Obsidian Black to Teal Sky, evoking a journey’s horizon */
+  padding: 2rem;
   text-align: center;
   position: sticky;
   top: 0;
   z-index: 10;
-  border-bottom: 2px solid #FF6F61; /* Neon Coral for a bold accent */
+  border-bottom: 2px solid #FF5E62; /* Vibrant Coral for a bold accent */
   transition: background 0.3s ease, opacity 0.3s ease;
 }
 
-@keyframes galleryPulse {
+@keyframes horizonGlow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
@@ -47,64 +47,64 @@ header {
 
 header {
   background-size: 200% 100%;
-  animation: galleryPulse 12s ease-in-out infinite;
+  animation: horizonGlow 10s ease-in-out infinite;
 }
 
 header h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  color: #1A1A1A; /* Ink Black for a gallery-like contrast */
+  color: #F8F9FA; /* Ivory White for contrast */
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 }
 
 nav {
-  margin: 0.8rem 0;
+  margin: 1rem 0;
 }
 
 nav a {
-  color: #B0BEC5; /* Polished Steel for nav links */
+  color: #D0D4D8; /* Polished Silver for nav links */
   text-decoration: none;
-  margin: 0 1rem;
+  margin: 0 1.5rem;
   font-weight: 500;
   transition: color 0.3s ease, transform 0.2s ease;
 }
 
 nav a:hover {
-  color: #FF6F61; /* Neon Coral for a vibrant hover effect */
+  color: #FF5E62; /* Vibrant Coral for a vibrant hover effect */
   transform: scale(1.1);
 }
 
 nav a:focus {
-  outline: 2px solid #FF6F61; /* Neon Coral for focus visibility */
+  outline: 2px solid #FF5E62; /* Vibrant Coral for focus visibility */
   outline-offset: 2px;
 }
 
 /* Main Content */
 main {
-  max-width: 1000px; /* Wider layout for a corporate feel */
-  margin: 3rem auto;
-  padding: 0 1.5rem;
+  max-width: 1100px; /* Wider for a corporate feel */
+  margin: 4rem auto;
+  padding: 0 2rem;
 }
 
 article {
-  background: rgba(255, 255, 255, 0.9); /* Slightly more opaque for a cleaner look */
+  background: rgba(255, 255, 255, 0.95); /* Clean, gallery-like frosted glass */
   border-radius: 0.75rem;
-  padding: 3rem;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(10px);
-  margin-bottom: 3rem;
+  padding: 3.5rem;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12px);
+  margin-bottom: 4rem;
   position: relative;
-  border-left: 4px solid #FF6F61; /* Neon Coral for an artistic accent */
+  border-left: 4px solid #26A69A; /* Teal Sky for an adventurous accent */
 }
 
 article h2 {
   font-family: 'Playfair Display', serif;
-  font-size: 2.4rem;
+  font-size: 2.6rem;
   font-weight: 600;
-  color: #1A1A1A; /* Ink Black for headings */
+  color: #121212; /* Obsidian Black for headings */
   margin-bottom: 1.5rem;
   letter-spacing: 0.02em;
 }
@@ -113,7 +113,7 @@ article h3 {
   font-family: 'Inter', sans-serif;
   font-size: 1.8rem;
   font-weight: 500;
-  color: #1A1A1A; /* Ink Black for subheadings */
+  color: #121212; /* Obsidian Black for subheadings */
   margin: 1.5rem 0 0.5rem;
 }
 
@@ -138,14 +138,14 @@ article ul li:before {
   content: '•';
   position: absolute;
   left: 0;
-  color: #FF6F61; /* Neon Coral for bullet points */
+  color: #FF5E62; /* Vibrant Coral for bullet points */
   font-size: 1.2rem;
 }
 
 /* Author Info */
 .author {
   font-style: italic;
-  color: #B0BEC5; /* Polished Steel for a subtle, modern accent */
+  color: #8A9A86; /* Sage Green for a natural, adventurous accent */
   margin-bottom: 1.5rem;
   font-size: 0.95rem;
 }
@@ -154,18 +154,18 @@ article ul li:before {
 img {
   display: block;
   width: 100%;
-  max-width: 700px;
+  max-width: 800px;
   height: auto;
   margin: 2rem auto;
-  border: 2px solid #B0BEC5; /* Polished Steel for a sleek border */
+  border: 2px solid #D0D4D8; /* Polished Silver for a sleek border */
   border-radius: 0.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 img:hover {
-  transform: scale(1.02);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transform: scale(1.03);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 img::before {
@@ -173,19 +173,19 @@ img::before {
   display: block;
   text-align: center;
   padding: 1rem;
-  background: #2A2A2A; /* Graphite Gray for placeholder background */
-  color: #B0BEC5; /* Polished Steel for placeholder text */
+  background: #121212; /* Obsidian Black for placeholder background */
+  color: #D0D4D8; /* Polished Silver for placeholder text */
   font-size: 0.9rem;
 }
 
 /* Code Blocks */
 pre {
   font-family: 'Courier New', monospace;
-  background: #2A2A2A; /* Graphite Gray for a sleek, modern look */
+  background: #121212; /* Obsidian Black for a modern, artistic look */
   padding: 1.5rem;
   border-radius: 0.5rem;
   margin: 1.5rem 0;
-  border-left: 4px solid #FF6F61; /* Neon Coral for an artistic accent */
+  border-left: 4px solid #FF5E62; /* Vibrant Coral for an artistic accent */
   box-sizing: border-box;
   position: relative;
   overflow-x: auto;
@@ -195,10 +195,10 @@ code {
   line-height: 1.6;
   white-space: pre-wrap;
   word-break: break-word;
-  color: #B0BEC5; /* Polished Steel for code text */
+  color: #D0D4D8; /* Polished Silver for code text */
 }
 
-/* Artistic Code Block Effect: Subtle Abstract Texture on Hover */
+/* Artistic Code Block Effect: Subtle Texture on Hover */
 pre:hover::after {
   content: '';
   position: absolute;
@@ -208,9 +208,9 @@ pre:hover::after {
   height: 100%;
   background: linear-gradient(
     45deg,
-    rgba(255, 111, 97, 0.1) 0%,
+    rgba(255, 94, 98, 0.1) 0%,
     transparent 50%,
-    rgba(255, 111, 97, 0.1) 100%
+    rgba(255, 94, 98, 0.1) 100%
   );
   pointer-events: none;
 }
@@ -232,8 +232,8 @@ article::before {
   height: 100%;
   background: linear-gradient(
     45deg,
-    rgba(74, 144, 226, 0.05),
-    rgba(176, 190, 197, 0.05)
+    rgba(38, 166, 154, 0.05),
+    rgba(208, 212, 216, 0.05)
   );
   opacity: 0;
   transition: opacity 0.4s ease;
@@ -248,39 +248,39 @@ article:hover::before {
 /* Footer */
 footer {
   text-align: center;
-  padding: 2rem;
-  background: #1A1A1A; /* Ink Black for a dramatic, gallery-like footer */
-  color: #B0BEC5; /* Polished Steel for contrast */
+  padding: 2.5rem;
+  background: #121212; /* Obsidian Black for a dramatic footer */
+  color: #D0D4D8; /* Polished Silver for contrast */
   font-size: 0.9rem;
 }
 
 footer a {
-  color: #FF6F61; /* Neon Coral for links */
+  color: #FF5E62; /* Vibrant Coral for links */
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 footer a:hover {
-  color: #B0BEC5; /* Polished Steel for hover effect */
+  color: #D0D4D8; /* Polished Silver for hover effect */
 }
 
 footer a:focus {
-  outline: 2px solid #FF6F61; /* Neon Coral for focus visibility */
+  outline: 2px solid #FF5E62; /* Vibrant Coral for focus visibility */
   outline-offset: 2px;
 }
 
-/* Links (Override Previous Hotpink Style) */
+/* Links */
 a, a:visited, a:hover, a:focus, a:link, a:active {
-  color: #FF6F61; /* Neon Coral for links */
+  color: #FF5E62; /* Vibrant Coral for links */
   font-weight: 500;
   text-decoration: none;
   transition: color 0.3s ease, border-bottom 0.3s ease;
 }
 
 a:hover, a:focus {
-  color: #B0BEC5; /* Polished Steel on hover/focus */
+  color: #D0D4D8; /* Polished Silver on hover/focus */
   text-decoration: underline;
-  border-bottom: 1px solid #FF6F61;
+  border-bottom: 1px solid #FF5E62;
 }
 
 /* Responsive Design */
@@ -313,23 +313,23 @@ a:hover, a:focus {
 
 /* Accessibility Enhancements */
 :focus {
-  outline: 2px solid #FF6F61; /* Neon Coral for focus outlines */
+  outline: 2px solid #FF5E62; /* Vibrant Coral for focus outlines */
   outline-offset: 2px;
 }
 
-/* Ensure sufficient contrast for WCAG compliance */
+/* Dark Mode Adjustments */
 @media (prefers-color-scheme: dark) {
   article {
-    background: rgba(42, 42, 42, 0.9); /* Graphite Gray for dark mode articles */
-    color: #B0BEC5; /* Polished Steel for readability */
+    background: rgba(18, 18, 18, 0.9); /* Obsidian Black for dark mode articles */
+    color: #D0D4D8; /* Polished Silver for readability */
   }
 
   article h2,
   article h3 {
-    color: #F5F5F5; /* Marble White for headings in dark mode */
+    color: #F8F9FA; /* Ivory White for headings in dark mode */
   }
 
   article ul li:before {
-    color: #FF6F61; /* Neon Coral remains consistent */
+    color: #FF5E62; /* Vibrant Coral remains consistent */
   }
 }

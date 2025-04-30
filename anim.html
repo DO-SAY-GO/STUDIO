@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brutalist Plaza Renderer</title>
+  <title>3-Point Perspective Cube</title>
   <style>
-    /* Reset and Canvas Styling */
     * {
       margin: 0;
       padding: 0;
@@ -25,223 +24,166 @@
   </style>
 </head>
 <body>
-  <canvas id="plazaCanvas"></canvas>
+  <canvas id="cubeCanvas"></canvas>
 
   <script>
-    // state
-      // Get the Canvas element and context
-      const canvas = document.getElementById('plazaCanvas');
-      if (!canvas) {
-        console.error('Canvas element not found!');
+    // Canvas setup
+    const canvas = document.getElementById('cubeCanvas');
+    if (!canvas) {
+      console.error('Canvas element not found!');
+    }
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) {
+      console.error('Failed to get 2D context for Canvas!');
+    }
+
+    // Perspective parameters
+    let horizonY = canvas.height * 0.382; // 38.2% from top (61.8% from bottom)
+    let vp1 = { x: -canvas.width * 0.5, y: horizonY }; // Left vanishing point (off-screen)
+    let vp2 = { x: canvas.width * 1.5, y: horizonY }; // Right vanishing point (off-screen)
+    let vp3 = { x: canvas.width / 2, y: -canvas.height * 0.5 }; // Top vanishing point (off-screen)
+    const perspective = 1000; // Controls depth effect
+
+    // Cube definition
+    const cubeSize = 100; // Side length
+    let cube = { center: { x: 0, y: 0, z: -300 }, vertices: [] }; // Single cube, default center
+    // Cube faces (indices into vertices array)
+    const cubeFaces = [
+      { vertices: [0, 1, 5, 4], color: '#808080' }, // Front
+      { vertices: [2, 3, 7, 6], color: '#808080' }, // Back
+      { vertices: [0, 3, 7, 4], color: '#808080' }, // Left
+      { vertices: [1, 2, 6, 5], color: '#808080' }, // Right
+      { vertices: [4, 5, 6, 7], color: '#808080' }, // Top
+      { vertices: [0, 1, 2, 3], color: '#808080' }  // Bottom
+    ];
+
+    // logic
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    // Initial cube setup and render
+    initializeCube();
+    render();
+
+    // Generate cube vertices
+    function generateCubeVertices(center) {
+      const { x, y, z } = center;
+      const s = cubeSize / 2;
+      return [
+        { x: x - s, y: y, z: z - s },       // 0: Bottom front left
+        { x: x + s, y: y, z: z - s },       // 1: Bottom front right
+        { x: x + s, y: y, z: z + s },       // 2: Bottom back right
+        { x: x - s, y: y, z: z + s },       // 3: Bottom back left
+        { x: x - s, y: y + cubeSize, z: z - s }, // 4: Top front left
+        { x: x + s, y: y + cubeSize, z: z - s }, // 5: Top front right
+        { x: x + s, y: y + cubeSize, z: z + s }, // 6: Top back right
+        { x: x - s, y: y + cubeSize, z: z + s }  // 7: Top back left
+      ];
+    }
+
+    // Canvas dimensions
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      initializeCube(); // Re-randomize cube position
+      render(); // Re-render on resize
+    }
+
+    // Randomize cube position
+    function initializeCube() {
+      const x = Math.random() * (canvas.width / 2) - canvas.width / 4; // -width/4 to width/4
+      const z = Math.random() * -400 - 200; // -200 to -600
+      cube.center = { x, y: 0, z };
+      cube.vertices = generateCubeVertices(cube.center);
+      console.log('Cube positioned at:', cube.center);
+    }
+
+    // 3-point perspective projection
+    function project(x, y, z) {
+      // Distance from viewer (z is negative, closer is less negative)
+      const d = perspective / (perspective - z);
+      if (isNaN(d) || d <= 0) {
+        console.error('Invalid projection:', { x, y, z, d });
+        return { x: 0, y: 0 };
       }
 
-      const ctx = canvas.getContext('2d');
-      if (!ctx) {
-        console.error('Failed to get 2D context for Canvas!');
+      // Project x to VP1 (left) or VP2 (right) based on x-coordinate
+      const projX = canvas.width / 2 + x * d + (x < 0 ? (vp1.x - canvas.width / 2) * (1 - d) : (vp2.x - canvas.width / 2) * (1 - d));
+
+      // Project y to VP3 (top vanishing point)
+      const projY = horizonY + y * d + (vp3.y - horizonY) * (1 - d);
+
+      if (isNaN(projX) || isNaN(projY)) {
+        console.error('NaN in projection:', { x, y, z, projX, projY, d });
+        return { x: 0, y: 0 };
       }
+      return { x: projX, y: projY, scale: d };
+    }
 
-      // Set canvas size to window dimensions
-      let vanishingPointY;
-      // Perspective and projection parameters
-      const perspective = 1500; // Deep perspective for 3D effect
-      let time = 0; // For animation
-
-      // Define a building with 3D properties
-      const buildings = [];
-      const numBuildings = 8; // Number of buildings to generate
-
-      // Floor plane
-      const floor = {
-        x: canvas.width / 2,
-        y: vanishingPointY,
-        width: canvas.width * 2, // Extend beyond viewport
-        height: canvas.height,
-        depth: -900 // Far back to act as the ground
-      };
-
-    // Start animation
-      window.addEventListener('resize', resizeCanvas);
-      resizeCanvas();
-      animate();
-
-    // helpers
-      function initializeBuildings() {
-        buildings.length = 0; // Clear existing buildings
-        for (let i = 0; i < numBuildings; i++) {
-          const baseWidth = Math.random() * 150 + 100; // Random base width between 100 and 250
-          const baseHeight = Math.random() * 150 + 100; // Random base height between 100 and 250
-          const depth = Math.random() * -800 - 100; // Random depth between -100 and -900
-          const height = Math.random() * 400 + 300; // Random height between 300 and 700
-          const x = Math.random() * canvas.width; // Random x position
-          const y = vanishingPointY - baseHeight / 2; // Position on the ground plane
-
-          // Safeguard against NaN values
-          if (isNaN(x) || isNaN(y) || isNaN(baseWidth) || isNaN(baseHeight) || isNaN(height) || isNaN(depth)) {
-            console.error('NaN detected in building initialization:', { x, y, baseWidth, baseHeight, height, depth });
-            continue; // Skip this building
-          }
-
-          buildings.push({ x, y, baseWidth, baseHeight, height, depth });
+    // Draw a face from vertex indices
+    function drawFace(cube, face) {
+      try {
+        ctx.save();
+        const points2D = face.vertices.map(index => project(
+          cube.vertices[index].x,
+          cube.vertices[index].y,
+          cube.vertices[index].z
+        ));
+        ctx.beginPath();
+        ctx.moveTo(points2D[0].x, points2D[0].y);
+        for (let i = 1; i < points2D.length; i++) {
+          ctx.lineTo(points2D[i].x, points2D[i].y);
         }
-        console.log('Buildings initialized:', buildings);
+        ctx.closePath();
+        ctx.fillStyle = face.color;
+        ctx.fill();
+        ctx.strokeStyle = 'black'; // Outline for clarity
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.restore();
+
+        // Debug: Log projected points
+        console.log('Face projected points:', points2D.map(p => ({ x: p.x, y: p.y })));
+      } catch (error) {
+        console.error('Error drawing face:', error);
       }
+    }
 
-      function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        vanishingPointY = canvas.height * (1 - 0.618); // 61.8% from the bottom (38.2% from the top)
-        console.log('Canvas resized to:', canvas.width, 'x', canvas.height, 'vanishingPointY:', vanishingPointY);
-        initializeBuildings(); // Reinitialize buildings after resize
+    // Draw horizon line
+    function drawGuides() {
+      ctx.save();
+      // Horizon line
+      ctx.beginPath();
+      ctx.moveTo(0, horizonY);
+      ctx.lineTo(canvas.width, horizonY);
+      ctx.strokeStyle = 'red';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // Main render function
+    function render() {
+      try {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Update perspective parameters
+        horizonY = canvas.height * 0.382;
+        vp1 = { x: -canvas.width * 0.5, y: horizonY };
+        vp2 = { x: canvas.width * 1.5, y: horizonY };
+        vp3 = { x: canvas.width / 2, y: -canvas.height * 0.5 };
+
+        // Draw guides
+        drawGuides();
+
+        // Render cube (no sorting needed for one cube)
+        cubeFaces.forEach(face => {
+          drawFace(cube, face);
+        });
+      } catch (error) {
+        console.error('Error in render:', error);
       }
-
-      // Function to project 3D coordinates to 2D
-      function project(x, y, z) {
-        const scale = perspective / (perspective + z);
-        const projX = x * scale + canvas.width / 2;
-        const projY = y * scale + vanishingPointY;
-        if (isNaN(projX) || isNaN(projY) || isNaN(scale)) {
-          console.error('NaN detected in projection:', { x, y, z, projX, projY, scale });
-          return { x: 0, y: 0, scale: 1 }; // Fallback
-        }
-        return { x: projX, y: projY, scale };
-      }
-
-      // Draw a 3D building (rectangular prism or pyramid)
-      function drawBuilding(building) {
-        try {
-          ctx.save(); // Save the Canvas state
-
-          const { x, y, baseWidth, baseHeight, height, depth } = building;
-
-          // Project the base points (bottom face)
-          const basePoints3D = [
-            { x: x - baseWidth / 2, y: y - baseHeight / 2, z: depth }, // Bottom-left
-            { x: x + baseWidth / 2, y: y - baseHeight / 2, z: depth }, // Bottom-right
-            { x: x + baseWidth / 2, y: y + baseHeight / 2, z: depth }, // Top-right
-            { x: x - baseWidth / 2, y: y + baseHeight / 2, z: depth }  // Top-left
-          ];
-
-          const basePoints2D = basePoints3D.map(point => project(point.x, point.y, point.z));
-
-          // Project the top points (top face)
-          const topPoints3D = [
-            { x: x - baseWidth / 4, y: y - baseHeight / 4, z: depth + height }, // Top-left (smaller for pyramid effect)
-            { x: x + baseWidth / 4, y: y - baseHeight / 4, z: depth + height }, // Top-right
-            { x: x + baseWidth / 4, y: y + baseHeight / 4, z: depth + height }, // Bottom-right
-            { x: x - baseWidth / 4, y: y + baseHeight / 4, z: depth + height }  // Bottom-left
-          ];
-
-          const topPoints2D = topPoints3D.map(point => project(point.x, point.y, point.z));
-
-          // Draw the building faces (voxel-like structure)
-          // Bottom face
-          ctx.beginPath();
-          ctx.moveTo(basePoints2D[0].x, basePoints2D[0].y);
-          for (let i = 1; i < basePoints2D.length; i++) {
-            ctx.lineTo(basePoints2D[i].x, basePoints2D[i].y);
-          }
-          ctx.closePath();
-          ctx.fillStyle = '#4A4A4A'; // Slate Gray (concrete)
-          ctx.fill();
-
-          // Top face
-          ctx.beginPath();
-          ctx.moveTo(topPoints2D[0].x, topPoints2D[0].y);
-          for (let i = 1; i < topPoints2D.length; i++) {
-            ctx.lineTo(topPoints2D[i].x, topPoints2D[i].y);
-          }
-          ctx.closePath();
-          ctx.fillStyle = '#4A4A4A';
-          ctx.fill();
-
-          // Side faces (connect bottom to top)
-          for (let i = 0; i < 4; i++) {
-            const next = (i + 1) % 4;
-            ctx.beginPath();
-            ctx.moveTo(basePoints2D[i].x, basePoints2D[i].y);
-            ctx.lineTo(basePoints2D[next].x, basePoints2D[next].y);
-            ctx.lineTo(topPoints2D[next].x, topPoints2D[next].y);
-            ctx.lineTo(topPoints2D[i].x, topPoints2D[i].y);
-            ctx.closePath();
-            // Adjust fill based on face orientation for lighting
-            const brightness = Math.max(0, Math.min(1, (i % 2) * 0.5 + 0.3)); // Simulate lighting
-            ctx.fillStyle = `rgba(${74 + brightness * 50}, ${74 + brightness * 50}, ${74 + brightness * 50}, 1)`;
-
-            // Add harsh noon shadows for each face
-            const scale = perspective / (perspective + depth);
-            ctx.shadowColor = 'rgba(0, 0, 0, 0.7)';
-            ctx.shadowBlur = 20;
-            ctx.shadowOffsetX = 20 * scale;
-            ctx.shadowOffsetY = 20 * scale;
-            ctx.fill();
-          }
-
-          ctx.restore(); // Restore the Canvas state
-        } catch (error) {
-          console.error('Error drawing building:', error);
-        }
-      }
-
-      // Draw the floor plane
-      function drawFloor(floor) {
-        try {
-          ctx.save(); // Save the Canvas state
-
-          const { x, y, width, height, depth } = floor;
-
-          // Project the floor points
-          const floorPoints3D = [
-            { x: x - width / 2, y: y - height / 2, z: depth },
-            { x: x + width / 2, y: y - height / 2, z: depth },
-            { x: x + width / 2, y: y + height / 2, z: depth },
-            { x: x - width / 2, y: y + height / 2, z: depth }
-          ];
-
-          const floorPoints2D = floorPoints3D.map(point => project(point.x, point.y, point.z));
-
-          // Draw the floor
-          ctx.beginPath();
-          ctx.moveTo(floorPoints2D[0].x, floorPoints2D[0].y);
-          for (let i = 1; i < floorPoints2D.length; i++) {
-            ctx.lineTo(floorPoints2D[i].x, floorPoints2D[i].y);
-          }
-          ctx.closePath();
-          ctx.fillStyle = '#2A2A2A'; // Charcoal for the floor
-          ctx.fill();
-
-          ctx.restore(); // Restore the Canvas state
-        } catch (error) {
-          console.error('Error drawing floor:', error);
-        }
-      }
-
-      // Animation loop
-      function animate() {
-        try {
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          vanishingPointY = canvas.height * (1 - 0.618); // Recompute in case of resize
-          time += 0.02;
-
-          // Update floor position with new vanishing point
-          floor.y = vanishingPointY;
-
-          // Draw the floor first
-          drawFloor(floor);
-
-          // Sort buildings by depth for correct rendering order (back to front)
-          buildings.sort((a, b) => b.depth - a.depth);
-
-          buildings.forEach(building => {
-            // Update building depth for subtle floating effect
-            building.depth += Math.sin(time + building.x / 200) * 2;
-            drawBuilding(building);
-          });
-
-          requestAnimationFrame(animate);
-        } catch (error) {
-          console.error('Error in animation loop:', error);
-        }
-      }
+    }
 
   </script>
 </body>

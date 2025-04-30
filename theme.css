@@ -1,7 +1,7 @@
 /* STUDIO by DOSAYGO Theme - April 2025 Forecast */
-/* Inspired by open roads, boundless skies, and Contemplative Harmony voice */
-/* Palette: Saddle Brown (#4A2C0F), Pale Sky (#E6E7F0), Dusk Purple (#2B1A3D), Brass (#B89778), Ember (#D9663A), Muted Blue (#5A7CA3) */
-/* Typography: Variable font 'Roboto Flex' for rugged elegance, fallback to sans-serif */
+/* Inspired by contemporary art, modern architecture, and corporate elegance, rooted in contemplative harmony */
+/* Palette: Ink Black (#1A1A1A), Marble White (#F5F5F5), Graphite Gray (#2A2A2A), Polished Steel (#B0BEC5), Neon Coral (#FF6F61), Canvas Blue (#4A90E2) */
+/* Typography: 'Inter' for modern professionalism, 'Playfair Display' for artistic headings, fallbacks to sans-serif/serif */
 
 /* Reset and Base Styles */
 * {
@@ -11,35 +11,35 @@
 }
 
 body {
-  font-family: 'Roboto Flex', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 18px;
-  line-height: 1.6;
-  color: #5A7CA3; /* Muted Blue for body text, aligning with screenshot */
-  background: #E6E7F0; /* Pale Sky for a serene backdrop, matching screenshot */
+  line-height: 1.7;
+  color: #4A90E2; /* Canvas Blue for body text */
+  background: #F5F5F5; /* Marble White for a gallery-like backdrop */
   transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* Dark Mode */
 @media (prefers-color-scheme: dark) {
   body {
-    background: #2B1A3D; /* Dusk Purple, matching screenshot header */
-    color: #A3CFFA; /* Sky Blue for contrast in dark mode */
+    background: #2A2A2A; /* Graphite Gray for a sleek dark mode */
+    color: #B0BEC5; /* Polished Steel for contrast */
   }
 }
 
 /* Header */
 header {
-  background: linear-gradient(135deg, #2B1A3D 0%, #B89778 100%); /* Dusk Purple to Brass, evoking a twilight sky */
+  background: linear-gradient(135deg, #2A2A2A 0%, #B0BEC5 50%, #2A2A2A 100%); /* Graphite Gray to Polished Steel, a modern architectural gradient */
   padding: 1.5rem;
   text-align: center;
   position: sticky;
   top: 0;
   z-index: 10;
-  border-bottom: 2px solid #D9663A; /* Ember for a warm accent */
+  border-bottom: 2px solid #FF6F61; /* Neon Coral for a bold accent */
   transition: background 0.3s ease, opacity 0.3s ease;
 }
 
-@keyframes windFlow {
+@keyframes galleryPulse {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
@@ -47,16 +47,17 @@ header {
 
 header {
   background-size: 200% 100%;
-  animation: windFlow 10s ease-in-out infinite;
+  animation: galleryPulse 12s ease-in-out infinite;
 }
 
 header h1 {
-  font-size: 2rem;
-  font-variation-settings: 'wght' 700;
-  color: #4A2C0F; /* Saddle Brown for warmth and contrast */
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1A1A1A; /* Ink Black for a gallery-like contrast */
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.05em;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
 nav {
@@ -64,57 +65,62 @@ nav {
 }
 
 nav a {
-  color: #D9E6FF; /* Light grayish-blue from screenshot for nav links */
+  color: #B0BEC5; /* Polished Steel for nav links */
   text-decoration: none;
   margin: 0 1rem;
-  font-variation-settings: 'wght' 500;
+  font-weight: 500;
   transition: color 0.3s ease, transform 0.2s ease;
 }
 
 nav a:hover {
-  color: #D9663A; /* Ember for a warm hover effect */
+  color: #FF6F61; /* Neon Coral for a vibrant hover effect */
   transform: scale(1.1);
 }
 
 nav a:focus {
-  outline: 2px solid #D9663A; /* Ember for focus visibility */
+  outline: 2px solid #FF6F61; /* Neon Coral for focus visibility */
   outline-offset: 2px;
 }
 
 /* Main Content */
 main {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  max-width: 1000px; /* Wider layout for a corporate feel */
+  margin: 3rem auto;
+  padding: 0 1.5rem;
 }
 
 article {
-  background: rgba(255, 255, 255, 0.85); /* Frosted glass effect, matching screenshot */
-  border-radius: 1rem;
-  padding: 2.5rem;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(8px);
-  margin-bottom: 2rem;
+  background: rgba(255, 255, 255, 0.9); /* Slightly more opaque for a cleaner look */
+  border-radius: 0.75rem;
+  padding: 3rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  margin-bottom: 3rem;
   position: relative;
+  border-left: 4px solid #FF6F61; /* Neon Coral for an artistic accent */
 }
 
 article h2 {
-  font-size: 2.2rem;
-  font-variation-settings: 'wght' 600;
-  color: #4A2C0F; /* Saddle Brown for headings, matching screenshot */
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: #1A1A1A; /* Ink Black for headings */
   margin-bottom: 1.5rem;
+  letter-spacing: 0.02em;
 }
 
 article h3 {
-  font-size: 1.6rem;
-  font-variation-settings: 'wght' 500;
-  color: #4A2C0F; /* Saddle Brown for subheadings */
+  font-family: 'Inter', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #1A1A1A; /* Ink Black for subheadings */
   margin: 1.5rem 0 0.5rem;
 }
 
 article p {
   margin-bottom: 1.5rem;
   text-align: justify;
+  letter-spacing: 0.01em;
 }
 
 article ul {
@@ -132,14 +138,14 @@ article ul li:before {
   content: '•';
   position: absolute;
   left: 0;
-  color: #D9663A; /* Ember for bullet points */
+  color: #FF6F61; /* Neon Coral for bullet points */
   font-size: 1.2rem;
 }
 
 /* Author Info */
 .author {
   font-style: italic;
-  color: #5B3A6B; /* Dusk Purple for a subtle accent */
+  color: #B0BEC5; /* Polished Steel for a subtle, modern accent */
   margin-bottom: 1.5rem;
   font-size: 0.95rem;
 }
@@ -148,12 +154,18 @@ article ul li:before {
 img {
   display: block;
   width: 100%;
-  max-width: 600px;
+  max-width: 700px;
   height: auto;
-  margin: 1.5rem auto;
-  border: 3px solid #B89778; /* Brass for a warm, grounding border */
+  margin: 2rem auto;
+  border: 2px solid #B0BEC5; /* Polished Steel for a sleek border */
   border-radius: 0.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 img::before {
@@ -161,19 +173,19 @@ img::before {
   display: block;
   text-align: center;
   padding: 1rem;
-  background: #5B3A6B; /* Dusk Purple for placeholder background */
-  color: #A3CFFA; /* Sky Blue for placeholder text */
+  background: #2A2A2A; /* Graphite Gray for placeholder background */
+  color: #B0BEC5; /* Polished Steel for placeholder text */
   font-size: 0.9rem;
 }
 
 /* Code Blocks */
 pre {
   font-family: 'Courier New', monospace;
-  background: #3A2A4A; /* Darker purple for code blocks, inspired by terminal aesthetics */
-  padding: 1.2rem;
+  background: #2A2A2A; /* Graphite Gray for a sleek, modern look */
+  padding: 1.5rem;
   border-radius: 0.5rem;
   margin: 1.5rem 0;
-  border-left: 4px solid #D9663A; /* Ember for a warm accent */
+  border-left: 4px solid #FF6F61; /* Neon Coral for an artistic accent */
   box-sizing: border-box;
   position: relative;
   overflow-x: auto;
@@ -183,10 +195,10 @@ code {
   line-height: 1.6;
   white-space: pre-wrap;
   word-break: break-word;
-  color: #D9E6FF; /* Light grayish-blue for code text, matching screenshot */
+  color: #B0BEC5; /* Polished Steel for code text */
 }
 
-/* Retro CRT Scanline Effect on Hover */
+/* Artistic Code Block Effect: Subtle Abstract Texture on Hover */
 pre:hover::after {
   content: '';
   position: absolute;
@@ -194,23 +206,23 @@ pre:hover::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: repeating-linear-gradient(
-    transparent 0%,
-    transparent 2px,
-    rgba(0, 0, 0, 0.05) 2px,
-    rgba(0, 0, 0, 0.05) 4px
+  background: linear-gradient(
+    45deg,
+    rgba(255, 111, 97, 0.1) 0%,
+    transparent 50%,
+    rgba(255, 111, 97, 0.1) 100%
   );
   pointer-events: none;
 }
 
-/* Micro-Animations for Adventure Vibe */
+/* Micro-Animations for Artistic Vibe */
 article:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+  transform: translateY(-10px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-/* Parallax Background for Landscape Feel */
+/* Gallery-Like Background Effect */
 article::before {
   content: '';
   position: absolute;
@@ -220,12 +232,12 @@ article::before {
   height: 100%;
   background: linear-gradient(
     45deg,
-    rgba(163, 207, 250, 0.1),
-    rgba(219, 151, 120, 0.1)
+    rgba(74, 144, 226, 0.05),
+    rgba(176, 190, 197, 0.05)
   );
   opacity: 0;
   transition: opacity 0.4s ease;
-  border-radius: 1rem;
+  border-radius: 0.75rem;
   z-index: -1;
 }
 
@@ -237,30 +249,44 @@ article:hover::before {
 footer {
   text-align: center;
   padding: 2rem;
-  background: #4A2C0F; /* Saddle Brown for a grounded footer */
-  color: #A3CFFA; /* Sky Blue for contrast */
+  background: #1A1A1A; /* Ink Black for a dramatic, gallery-like footer */
+  color: #B0BEC5; /* Polished Steel for contrast */
   font-size: 0.9rem;
 }
 
 footer a {
-  color: #D9663A; /* Ember for links */
+  color: #FF6F61; /* Neon Coral for links */
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 footer a:hover {
-  color: #B89778; /* Brass for hover effect */
+  color: #B0BEC5; /* Polished Steel for hover effect */
 }
 
 footer a:focus {
-  outline: 2px solid #D9663A; /* Ember for focus visibility */
+  outline: 2px solid #FF6F61; /* Neon Coral for focus visibility */
   outline-offset: 2px;
+}
+
+/* Links (Override Previous Hotpink Style) */
+a, a:visited, a:hover, a:focus, a:link, a:active {
+  color: #FF6F61; /* Neon Coral for links */
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+a:hover, a:focus {
+  color: #B0BEC5; /* Polished Steel on hover/focus */
+  text-decoration: underline;
+  border-bottom: 1px solid #FF6F61;
 }
 
 /* Responsive Design */
 @media (max-width: 600px) {
   header h1 {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
 
   nav a {
@@ -269,11 +295,11 @@ footer a:focus {
   }
 
   article {
-    padding: 1.5rem;
+    padding: 2rem;
   }
 
   article h2 {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
 
   article h3 {
@@ -287,29 +313,23 @@ footer a:focus {
 
 /* Accessibility Enhancements */
 :focus {
-  outline: 2px solid #D9663A; /* Ember for focus outlines */
+  outline: 2px solid #FF6F61; /* Neon Coral for focus outlines */
   outline-offset: 2px;
 }
 
 /* Ensure sufficient contrast for WCAG compliance */
 @media (prefers-color-scheme: dark) {
   article {
-    background: rgba(43, 26, 61, 0.85); /* Darker Dusk Purple for dark mode articles */
-    color: #A3CFFA; /* Sky Blue for readability */
+    background: rgba(42, 42, 42, 0.9); /* Graphite Gray for dark mode articles */
+    color: #B0BEC5; /* Polished Steel for readability */
   }
 
   article h2,
   article h3 {
-    color: #D9E6FF; /* Light grayish-blue for headings in dark mode */
+    color: #F5F5F5; /* Marble White for headings in dark mode */
   }
 
   article ul li:before {
-    color: #D9663A; /* Ember remains consistent */
+    color: #FF6F61; /* Neon Coral remains consistent */
   }
-}
-
-a, a:visited, a:hover, a:focus, a:link, a:active {
-  color: hotpink                       !important;
-  font-weight: bold                    !important;
-  text-decoration: underline           !important;
 }

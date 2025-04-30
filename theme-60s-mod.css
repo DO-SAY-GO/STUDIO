@@ -1,0 +1,209 @@
+/* STUDIO by DOSAYGO Theme - 1960s Mod Nature Explorer */
+/* 1960s mod aesthetic with a nature explorer vibe */
+/* Palette: Olive Green (#6B8E23), Tangerine Orange (#FF8C00), Mod Pink (#FF6EB4), Retro Yellow (#FFFF99), Vintage White (#F8F8F8) */
+/* Typography: 'Courier New' for typewriter retro, 'Futura' for mod headings */
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #FF8C00; /* Tangerine Orange for body text */
+  background: #6B8E23; /* Olive Green for backdrop */
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Header */
+header {
+  background: #FF6EB4; /* Mod Pink for header */
+  padding: 1rem 2rem;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 5px solid #FFFF99; /* Retro Yellow border */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+  font-family: 'Futura', sans-serif;
+  font-size: 2.5rem;
+  font-weight: normal;
+  color: #FFFF99;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  text-shadow: 2px 2px #FF8C00; /* Tangerine Orange shadow */
+}
+
+nav {
+  margin: 1rem 0;
+}
+
+nav a {
+  font-family: 'Courier New', monospace;
+  color: #FFFF99;
+  text-decoration: none;
+  margin: 0 1.5rem;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid #FFFF99;
+  border-radius: 50%;
+  background: #6B8E23;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+nav a:hover {
+  background: #FFFF99;
+  color: #6B8E23;
+}
+
+/* Main Content */
+main {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+article {
+  background: #F8F8F8; /* Vintage White for articles */
+  border: 3px solid #FF6EB4; /* Mod Pink border */
+  padding: 2rem;
+  box-shadow: 5px 5px 0 #FF8C00; /* Tangerine Orange shadow */
+  position: relative;
+  border-radius: 50px 0 50px 0;
+}
+
+article h2 {
+  font-family: 'Futura', sans-serif;
+  font-size: 2rem;
+  font-weight: normal;
+  color: #6B8E23;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+article h3 {
+  font-family: 'Courier New', monospace;
+  font-size: 1.6rem;
+  font-weight: normal;
+  color: #FF6EB4;
+  margin: 1.5rem 0 0.5rem;
+}
+
+article p {
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+article ul {
+  list-style-type: none;
+  margin-bottom: 1.5rem;
+}
+
+article ul li {
+  margin-bottom: 1rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+article ul li:before {
+  content: '??';
+  position: absolute;
+  left: 0;
+  font-size: 1.2rem;
+}
+
+/* Author Info */
+.author {
+  font-style: italic;
+  color: #6B8E23;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Image Placeholders */
+img {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin: 2rem auto;
+  border: 3px solid #FFFF99;
+  border-radius: 50%;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Code Blocks */
+pre {
+  font-family: 'Courier New', monospace;
+  background: #6B8E23;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-sizing: border-box;
+  overflow-x: auto;
+  border: 2px solid #FF6EB4;
+}
+
+code {
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #FF8C00;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background: #FF6EB4;
+  color: #6B8E23;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #FFFF99;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #FF8C00;
+}
+
+/* Links */
+a, a:visited, a:hover, a:focus, a:link, a:active {
+  color: #FFFF99;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover, a:focus {
+  color: #FF8C00;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header {
+    padding: 1rem;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  nav a {
+    margin: 0 0.5rem;
+    font-size: 1rem;
+  }
+}

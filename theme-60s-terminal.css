@@ -1,0 +1,215 @@
+/* STUDIO by DOSAYGO Theme - 1960s Retro-Futurist Terminal */
+/* 1960s retro-futurist aesthetic with a skydiving theme */
+/* Palette: Space Gray (#2F2F2F), Rocket Red (#FF4040), Atomic Blue (#4682B4), Retro Silver (#C0C0C0), Star White (#FFFFFF) */
+/* Typography: 'Courier New' for typewriter retro */
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #4682B4; /* Atomic Blue for body text */
+  background: #2F2F2F; /* Space Gray for backdrop */
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Header */
+header {
+  background: #C0C0C0; /* Retro Silver for header */
+  padding: 1rem 2rem;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 5px solid #FF4040; /* Rocket Red border */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+  font-family: 'Courier New', monospace;
+  font-size: 2.5rem;
+  font-weight: normal;
+  color: #FF4040;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  text-shadow: 2px 2px #4682B4; /* Atomic Blue shadow */
+}
+
+nav {
+  margin: 1rem 0;
+}
+
+nav a {
+  font-family: 'Courier New', monospace;
+  color: #4682B4;
+  text-decoration: none;
+  margin: 0 1.5rem;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid #4682B4;
+  background: #C0C0C0;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+nav a:hover {
+  background: #4682B4;
+  color: #C0C0C0;
+}
+
+/* Main Content */
+main {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+article {
+  background: #FFFFFF; /* Star White for articles */
+  border: 3px solid #FF4040; /* Rocket Red border */
+  padding: 2rem;
+  box-shadow: 5px 5px 0 #4682B4; /* Atomic Blue shadow */
+  position: relative;
+}
+
+article::before {
+  content: ">>> TERMINAL OUTPUT >>>";
+  font-family: 'Courier New', monospace;
+  color: #FF4040;
+  display: block;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+article h2 {
+  font-family: 'Courier New', monospace;
+  font-size: 2rem;
+  font-weight: normal;
+  color: #4682B4;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+article h3 {
+  font-family: 'Courier New', monospace;
+  font-size: 1.6rem;
+  font-weight: normal;
+  color: #FF4040;
+  margin: 1.5rem 0 0.5rem;
+}
+
+article p {
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+article ul {
+  list-style-type: none;
+  margin-bottom: 1.5rem;
+}
+
+article ul li {
+  margin-bottom: 1rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+article ul li:before {
+  content: '??';
+  position: absolute;
+  left: 0;
+  font-size: 1.2rem;
+}
+
+/* Author Info */
+.author {
+  font-style: italic;
+  color: #4682B4;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Image Placeholders */
+img {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin: 2rem auto;
+  border: 3px solid #FF4040;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Code Blocks */
+pre {
+  font-family: 'Courier New', monospace;
+  background: #2F2F2F;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-sizing: border-box;
+  overflow-x: auto;
+  border: 2px solid #4682B4;
+}
+
+code {
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #FFFFFF;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background: #C0C0C0;
+  color: #FF4040;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #4682B4;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #FFFFFF;
+}
+
+/* Links */
+a, a:visited, a:hover, a:focus, a:link, a:active {
+  color: #4682B4;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover, a:focus {
+  color: #FFFFFF;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header {
+    padding: 1rem;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  nav a {
+    margin: 0 0.5rem;
+    font-size: 1rem;
+  }
+}

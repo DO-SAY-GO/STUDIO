@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3-Point Perspective Cube with Matrix</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      overflow: hidden;
+      background: dodgerblue;
+    }
+
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .debug-checkbox {
+      position: absolute;
+      top: 1em;
+      left: 1em;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 0.5em;
+      border-radius: 4px;
+      font-family: Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="cubeCanvas"></canvas>
+  <div class="debug-checkbox">
+    <label>
+      <input type="checkbox" id="debugLines"> Show Debug Lines
+    </label>
+  </div>
+
+  <script>
+    // Imports, constants then state
+    const canvas = document.getElementById('cubeCanvas');
+    if (!canvas) {
+      console.error('Canvas element not found!');
+    }
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) {
+      console.error('Failed to get 2D context for Canvas!');
+    }
+
+    const debugCheckbox = document.getElementById('debugLines');
+    let showDebugLines = false;
+
+    let horizonY = canvas.height * 0.3; // Adjusted horizon to 30% from top
+    let vp1 = { x: 0, y: 0 }; // Will be computed dynamically
+    let vp2 = { x: 0, y: 0 };
+    let vp3 = { x: 0, y: 0 };
+
+    const fov = Math.PI / 4; // Reduced to 45 degrees
+    const near = 0.1;
+    const far = 1000;
+
+    // Camera parameters
+    const eye = { x: 50, y: 50, z: 50 }; // Moved closer
+    const center = { x: 0, y: 0, z: 0 };
+    const up = { x: 0, y: 1, z: 0 };
+
+    const cubeSize = 50; // Reduced from 100 to 50
+    const cube = {
+      center: { x: 0, y: 0, z: 0 },
+      vertices: [],
+      faces: [
+        { vertices: [0, 1, 5, 4], color: '#808080' }, // Front
+        { vertices: [2, 3, 7, 6], color: '#808080' }, // Back
+        { vertices: [0, 3, 7, 4], color: '#808080' }, // Left
+        { vertices: [1, 2, 6, 5], color: '#808080' }, // Right
+        { vertices: [4, 5, 6, 7], color: '#808080' }, // Top
+        { vertices: [0, 1, 2, 3], color: '#808080' }  // Bottom
+      ],
+      edges: [
+        { v1: 0, v2: 1, dir: 'x', vp: 'vp2' }, // Bottom front
+        { v1: 1, v2: 2, dir: 'z', vp: 'vp2' }, // Bottom right
+        { v1: 2, v2: 3, dir: 'x', vp: 'vp1' }, // Bottom back
+        { v1: 3, v2: 0, dir: 'z', vp: 'vp1' }, // Bottom left
+        { v1: 4, v2: 5, dir: 'x', vp: 'vp2' }, // Top front
+        { v1: 5, v2: 6, dir: 'z', vp: 'vp2' }, // Top right
+        { v1: 6, v2: 7, dir: 'x', vp: 'vp1' }, // Top back
+        { v1: 7, v2: 4, dir: 'z', vp: 'vp1' }, // Top left
+        { v1: 0, v2: 4, dir: 'y', vp: 'vp3' }, // Front left vertical
+        { v1: 1, v2: 5, dir: 'y', vp: 'vp3' }, // Front right vertical
+        { v1: 2, v2: 6, dir: 'y', vp: 'vp3' }, // Back right vertical
+        { v1: 3, v2: 7, dir: 'y', vp: 'vp3' }  // Back left vertical
+      ]
+    };
+
+    const floor = {
+      points: [
+        { x: -canvas.width, y: 0, z: -400 },
+        { x: canvas.width, y: 0, z: -400 },
+        { x: canvas.width, y: 0, z: 400 },
+        { x: -canvas.width, y: 0, z: 400 }
+      ]
+    };
+
+    // Logic
+    window.addEventListener('resize', resizeCanvas);
+    debugCheckbox.addEventListener('change', () => {
+      showDebugLines = debugCheckbox.checked;
+      render();
+    });
+    resizeCanvas();
+    initializeCube();
+    render();
+
+    // Functions
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      horizonY = canvas.height * 0.3;
+      initializeCube();
+      render();
+    }
+
+    function initializeCube() {
+      const { x: cx, y: cy, z: cz } = cube.center;
+      const s = cubeSize / 2;
+      cube.vertices = [
+        { x: cx - s, y: cy, z: cz + s },       // 0: Bottom front left
+        { x: cx + s, y: cy, z: cz + s },       // 1: Bottom front right
+        { x: cx + s, y: cy, z: cz - s },       // 2: Bottom back right
+        { x: cx - s, y: cy, z: cz - s },       // 3: Bottom back left
+        { x: cx - s, y: cy + cubeSize, z: cz + s }, // 4: Top front left
+        { x: cx + s, y: cy + cubeSize, z: cz + s }, // 5: Top front right
+        { x: cx + s, y: cy + cubeSize, z: cz - s }, // 6: Top back right
+        { x: cx - s, y: cy + cubeSize, z: cz - s }  // 7: Top back left
+      ];
+      console.log('Cube vertices:', cube.vertices);
+    }
+
+    function subtract(v1, v2) {
+      return {
+        x: v1.x - v2.x,
+        y: v1.y - v2.y,
+        z: v1.z - v2.z
+      };
+    }
+
+    function normalize(v) {
+      const len = Math.sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+      if (len === 0) return v;
+      return {
+        x: v.x / len,
+        y: v.y / len,
+        z: v.z / len
+      };
+    }
+
+    function cross(v1, v2) {
+      return {
+        x: v1.y * v2.z - v1.z * v2.y,
+        y: v1.z * v2.x - v1.x * v2.z,
+        z: v1.x * v2.y - v1.y * v2.x
+      };
+    }
+
+    function dot(v1, v2) {
+      return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+    }
+
+    function lookAt(eye, center, up) {
+      const f = normalize(subtract(center, eye));
+      const s = normalize(cross(up, f));
+      const u = cross(f, s);
+      return [
+        [s.x, s.y, s.z, -dot(s, eye)],
+        [u.x, u.y, u.z, -dot(u, eye)],
+        [-f.x, -f.y, -f.z, -dot({ x: -f.x, y: -f.y, z: -f.z }, eye)],
+        [0, 0, 0, 1]
+      ];
+    }
+
+    function perspective(fov, aspect, near, far) {
+      const f = 1 / Math.tan(fov / 2);
+      const rangeInv = 1 / (near - far);
+      return [
+        [f / aspect, 0, 0, 0],
+        [0, f, 0, 0],
+        [0, 0, (near + far) * rangeInv, near * far * rangeInv * 2],
+        [0, 0, -1, 0]
+      ];
+    }
+
+    function multiplyMatrixVector(matrix, vector) {
+      const result = [0, 0, 0, 0];
+      for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 4; j++) {
+          result[i] += matrix[i][j] * vector[j];
+        }
+      }
+      return result;
+    }
+
+    function projectVertex(vertex, viewMatrix, projMatrix, width, height) {
+      const v = [vertex.x, vertex.y, vertex.z, 1];
+      const vCamera = multiplyMatrixVector(viewMatrix, v);
+      const vProj = multiplyMatrixVector(projMatrix, vCamera);
+      if (vProj[3] === 0) {
+        console.error('Invalid projection, w = 0:', vertex);
+        return null;
+      }
+      const x = vProj[0] / vProj[3];
+      const y = vProj[1] / vProj[3];
+      const screenX = (x + 1) * (width / 2);
+      const screenY = (1 - y) * (height / 2);
+      return { x: screenX, y: screenY };
+    }
+
+    function project(x, y, z) {
+      const viewMatrix = lookAt(eye, center, up);
+      const aspect = canvas.width / canvas.height;
+      const projMatrix = perspective(fov, aspect, near, far);
+      return projectVertex({ x, y, z }, viewMatrix, projMatrix, canvas.width, canvas.height);
+    }
+
+    function drawFace(object, face) {
+      try {
+        const viewMatrix = lookAt(eye, center, up);
+        const aspect = canvas.width / canvas.height;
+        const projMatrix = perspective(fov, aspect, near, far);
+
+        const points2D = face.vertices.map(index => projectVertex(
+          object.vertices[index],
+          viewMatrix,
+          projMatrix,
+          canvas.width,
+          canvas.height
+        ));
+
+        if (points2D.some(p => p === null)) {
+          console.error('Projection failed for some vertices');
+          return;
+        }
+
+        const p0 = points2D[0], p1 = points2D[1], p2 = points2D[2];
+        const cross = (p1.x - p0.x) * (p2.y - p0.y) - (p1.y - p0.y) * (p2.x - p0.x);
+        if (cross <= 0) {
+          console.log('Skipping backface, cross:', cross);
+          return;
+        }
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(points2D[0].x, points2D[0].y);
+        for (let i = 1; i < points2D.length; i++) {
+          ctx.lineTo(points2D[i].x, points2D[i].y);
+        }
+        ctx.closePath();
+        ctx.fillStyle = face.color;
+        ctx.fill();
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.restore();
+
+        console.log('Face projected points:', points2D.map(p => ({ x: p.x, y: p.y })));
+      } catch (error) {
+        console.error('Error drawing face:', error);
+      }
+    }
+
+    function drawFloor() {
+      try {
+        ctx.save();
+        const points2D = floor.points.map(point => project(point.x, point.y, point.z));
+        if (points2D.some(p => p === null)) {
+          console.error('Projection failed for some floor vertices');
+          return;
+        }
+        ctx.beginPath();
+        ctx.moveTo(points2D[0].x, points2D[0].y);
+        for (let i = 1; i < points2D.length; i++) {
+          ctx.lineTo(points2D[i].x, points2D[i].y);
+        }
+        ctx.closePath();
+        ctx.fillStyle = '#2A2A2A';
+        ctx.fill();
+        ctx.restore();
+
+        console.log('Floor projected points:', points2D.map(p => ({ x: p.x, y: p.y })));
+      } catch (error) {
+        console.error('Error drawing floor:', error);
+      }
+    }
+
+    function drawGuides() {
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(0, horizonY);
+      ctx.lineTo(canvas.width, horizonY);
+      ctx.strokeStyle = 'red';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Draw vanishing points as yellow balls
+      ctx.fillStyle = 'yellow';
+      ctx.beginPath();
+      ctx.arc(vp1.x, vp1.y, 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(vp2.x, vp2.y, 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(vp3.x, vp3.y, 5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function drawDebugLines() {
+      ctx.save();
+      ctx.strokeStyle = 'yellow';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([5, 5]);
+
+      // Compute vanishing points dynamically
+      const vpX = project(10000, 0, 0);
+      const vpY = project(0, 10000, 0);
+      const vpZ = project(0, 0, 10000);
+      console.log('Vanishing points:', { vpX, vpY, vpZ });
+
+      // Update vanishing point positions for drawing
+      if (vpX) vp1 = { x: vpX.x, y: vpX.y };
+      if (vpZ) vp2 = { x: vpZ.x, y: vpZ.y };
+      if (vpY) vp3 = { x: vpY.x, y: vpY.y };
+
+      cube.edges.forEach(edge => {
+        const v1 = cube.vertices[edge.v1];
+        const v2 = cube.vertices[edge.v2];
+        const p1 = project(v1.x, v1.y, v1.z);
+        const p2 = project(v2.x, v2.y, v2.z);
+        if (!p1 || !p2) return;
+
+        let vp;
+        if (edge.vp === 'vp1') vp = vp1;
+        else if (edge.vp === 'vp2') vp = vp2;
+        else vp = vp3;
+
+        const dist1 = Math.hypot(p1.x - vp.x, p1.y - vp.y);
+        const dist2 = Math.hypot(p2.x - vp.x, p2.y - vp.y);
+        const startPoint = dist1 > dist2 ? p1 : p2;
+
+        ctx.beginPath();
+        ctx.moveTo(startPoint.x, startPoint.y);
+        ctx.lineTo(vp.x, vp.y);
+        ctx.stroke();
+        console.log(`Debug line for edge (${edge.v1}, ${edge.v2}) dir=${edge.dir} to ${edge.vp} from (${startPoint.x}, ${startPoint.y}) to (${vp.x}, ${vp.y})`);
+      });
+
+      ctx.setLineDash([]);
+      ctx.restore();
+    }
+
+    function render() {
+      try {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        drawFloor();
+        drawGuides();
+
+        const sortedFaces = cube.faces.map(face => {
+          const avgZ = face.vertices.reduce((sum, idx) => sum + cube.vertices[idx].z, 0) / face.vertices.length;
+          return { face, avgZ };
+        }).sort((a, b) => b.avgZ - a.avgZ);
+
+        console.log('Sorted faces by avgZ:', sortedFaces.map(f => f.avgZ));
+
+        sortedFaces.forEach(({ face }) => {
+          drawFace(cube, face);
+        });
+
+        if (showDebugLines) {
+          drawDebugLines();
+        }
+      } catch (error) {
+        console.error('Error in render:', error);
+      }
+    }
+  </script>
+</body>
+</html>

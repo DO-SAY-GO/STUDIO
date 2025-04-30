@@ -1,0 +1,218 @@
+/* STUDIO by DOSAYGO Theme - Early 2000s Neon Skydiver Hub */
+/* Early 2000s aesthetic with a skydiving community vibe */
+/* Palette: Sky Blue (#00BFFF), Neon Orange (#FF8C00), Glass Gray (#D3D3D3), Cloud White (#F5F5F5), Neon Red (#FF4040) */
+/* Typography: 'Arial' for 2000s body text, 'Arial Black' for bold headings */
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #000000; /* Black for body text */
+  background: #00BFFF url('https://www.transparenttextures.com/patterns/clouds.png'); /* Sky Blue with cloud texture */
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Header */
+header {
+  background: linear-gradient(to right, #D3D3D3, #F5F5F5); /* Glass Gray to Cloud White gradient */
+  padding: 1rem 2rem;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 5px solid #FF8C00; /* Neon Orange border */
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 2.5rem;
+  font-weight: normal;
+  color: #FF4040; /* Neon Red for contrast */
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 2px 2px #FF8C00; /* Neon Orange shadow */
+}
+
+nav {
+  margin: 1rem 0;
+}
+
+nav a {
+  font-family: 'Arial', sans-serif;
+  color: #000000;
+  background: linear-gradient(to bottom, #F5F5F5, #D3D3D3); /* Cloud White to Glass Gray button gradient */
+  text-decoration: none;
+  margin: 0 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  border: 2px outset #D3D3D3;
+  border-radius: 5px;
+  transition: background 0.3s ease, border 0.3s ease;
+}
+
+nav a:hover {
+  background: linear-gradient(to bottom, #D3D3D3, #F5F5F5);
+  border: 2px inset #D3D3D3;
+}
+
+/* Main Content */
+main {
+  width: 800px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.content {
+  flex: 3;
+}
+
+.sidebar {
+  flex: 1;
+  background: #F5F5F5;
+  border: 2px outset #D3D3D3;
+  padding: 1rem;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+article {
+  background: #FFFFFF;
+  border: 2px outset #D3D3D3;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+article h2 {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 2rem;
+  font-weight: normal;
+  color: #FF4040;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+article h3 {
+  font-family: 'Arial', sans-serif;
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #FF8C00;
+  margin: 1.5rem 0 0.5rem;
+}
+
+article p {
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+article ul {
+  list-style-type: square;
+  margin-bottom: 1.5rem;
+}
+
+article ul li {
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+/* Author Info */
+.author {
+  font-style: italic;
+  color: #FF4040;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Image Placeholders */
+img {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin: 2rem auto;
+  border: 3px solid #D3D3D3;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Code Blocks */
+pre {
+  font-family: 'Courier New', monospace;
+  background: #F5F5F5;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-sizing: border-box;
+  overflow-x: auto;
+  border: 2px inset #D3D3D3;
+}
+
+code {
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #000000;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(to left, #D3D3D3, #F5F5F5);
+  color: #000000;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #FF4040;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #FF8C00;
+}
+
+/* Links */
+a, a:visited, a:hover, a:focus, a:link, a:active {
+  color: #FF4040;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+a:hover, a:focus {
+  color: #FF8C00;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    margin-top: 2rem;
+  }
+
+  header {
+    padding: 1rem;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  nav a {
+    margin: 0 0.5rem;
+    font-size: 1rem;
+  }
+}

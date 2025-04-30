@@ -1,7 +1,7 @@
-/* STUDIO by DOSAYGO Theme - 1960s Psychedelic Road Trip */
-/* 1960s aesthetic with a psychedelic road trip vibe */
-/* Palette: Groovy Purple (#800080), Acid Yellow (#FFFF66), Hot Pink (#FF69B4), Lime Green (#32CD32), Retro White (#F5F5F5) */
-/* Typography: 'Courier New' for typewriter retro, 'Bebas Neue' for bold headings */
+/* STUDIO by DOSAYGO Theme - 90s Geocities Adventure */
+/* Inspired by Geocities pages with a travel and adventure vibe */
+/* Palette: Space Black (#000000), Neon Yellow (#FFFF00), Hot Pink (#FF00FF), Lime Green (#00FF00), Sky Blue (#00B7EB) */
+/* Typography: 'VT323' for pixelated retro, 'Comic Sans MS' for 90s body text */
 
 /* Reset and Base Styles */
 * {
@@ -11,34 +11,33 @@
 }
 
 body {
-  font-family: 'Courier New', monospace;
-  font-size: 16px;
+  font-family: 'Comic Sans MS', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
   line-height: 1.6;
-  color: #FFFF66; /* Acid Yellow for body text */
-  background: #800080 url('https://www.transparenttextures.com/patterns/swirl.png'); /* Groovy Purple with swirl pattern */
+  color: #FFFF00; /* Neon Yellow for body text */
+  background: #000000 url('https://www.transparenttextures.com/patterns/stardust.png'); /* Space Black with starry texture */
   transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* Header */
 header {
-  background: #FF69B4; /* Hot Pink for header */
+  background: #FF00FF; /* Hot Pink for header */
   padding: 1rem 2rem;
   text-align: center;
   position: sticky;
   top: 0;
   z-index: 10;
-  border-bottom: 5px solid #32CD32; /* Lime Green border */
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  border-bottom: 5px double #00FF00; /* Lime Green double border */
 }
 
 header h1 {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'VT323', monospace;
   font-size: 2.5rem;
-  font-weight: normal;
-  color: #FFFF66;
+  font-weight: 400;
+  color: #00B7EB; /* Sky Blue for contrast */
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  text-shadow: 2px 2px #32CD32; /* Lime Green shadow */
+  letter-spacing: 0.1em;
+  text-shadow: 2px 2px #00FF00; /* Lime Green shadow */
 }
 
 nav {
@@ -46,26 +45,26 @@ nav {
 }
 
 nav a {
-  font-family: 'Courier New', monospace;
-  color: #32CD32;
-  text-decoration: none;
+  font-family: 'VT323', monospace;
+  color: #00FF00;
+  text-decoration: underline;
   margin: 0 1.5rem;
   font-size: 1.2rem;
-  padding: 0.5rem 1rem;
-  border: 2px solid #32CD32;
-  border-radius: 5px;
-  background: #800080;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 nav a:hover {
-  background: #32CD32;
-  color: #800080;
+  color: #FFFF00;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
 }
 
 /* Main Content */
 main {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 2rem auto;
   padding: 0 2rem;
   display: flex;
@@ -74,28 +73,29 @@ main {
 }
 
 article {
-  background: #F5F5F5; /* Retro White for articles */
-  border: 3px solid #FF69B4; /* Hot Pink border */
+  background: #1C2526;
+  border: 3px solid #00B7EB; /* Sky Blue border */
+  border-radius: 0;
   padding: 2rem;
-  box-shadow: 5px 5px 0 #32CD32; /* Lime Green shadow */
+  box-shadow: 5px 5px 0 #FF00FF; /* Hot Pink shadow */
   position: relative;
 }
 
 article h2 {
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'VT323', monospace;
   font-size: 2rem;
-  font-weight: normal;
-  color: #800080;
+  font-weight: 400;
+  color: #FFFF00;
   margin-bottom: 1.5rem;
   text-align: center;
   text-transform: uppercase;
 }
 
 article h3 {
-  font-family: 'Courier New', monospace;
+  font-family: 'Comic Sans MS', sans-serif;
   font-size: 1.6rem;
-  font-weight: normal;
-  color: #FF69B4;
+  font-weight: bold;
+  color: #00FF00;
   margin: 1.5rem 0 0.5rem;
 }
 
@@ -116,16 +116,17 @@ article ul li {
 }
 
 article ul li:before {
-  content: '???';
+  content: '*';
   position: absolute;
   left: 0;
+  color: #FF00FF;
   font-size: 1.2rem;
 }
 
 /* Author Info */
 .author {
   font-style: italic;
-  color: #800080;
+  color: #00B7EB;
   margin-bottom: 1.5rem;
   font-size: 0.95rem;
   text-align: center;
@@ -138,56 +139,55 @@ img {
   max-width: 300px;
   height: auto;
   margin: 2rem auto;
-  border: 3px solid #32CD32;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  border: 3px dashed #FFFF00;
 }
 
 /* Code Blocks */
 pre {
-  font-family: 'Courier New', monospace;
-  background: #800080;
+  font-family: 'VT323', monospace;
+  background: #000000;
   padding: 1.5rem;
   margin: 1.5rem 0;
   box-sizing: border-box;
   overflow-x: auto;
-  border: 2px solid #FF69B4;
+  border: 2px solid #00FF00;
 }
 
 code {
   line-height: 1.6;
   white-space: pre-wrap;
   word-break: break-word;
-  color: #FFFF66;
+  color: #FFFF00;
 }
 
 /* Footer */
 footer {
   text-align: center;
   padding: 2rem;
-  background: #FF69B4;
-  color: #800080;
+  background: #FF00FF;
+  color: #00B7EB;
   font-size: 0.9rem;
 }
 
 footer a {
-  color: #32CD32;
-  text-decoration: none;
+  color: #FFFF00;
+  text-decoration: underline;
   transition: color 0.3s ease;
 }
 
 footer a:hover {
-  color: #FFFF66;
+  color: #00FF00;
 }
 
 /* Links */
 a, a:visited, a:hover, a:focus, a:link, a:active {
-  color: #32CD32;
-  text-decoration: none;
+  color: #00B7EB;
+  text-decoration: underline;
   transition: color 0.3s ease;
 }
 
 a:hover, a:focus {
-  color: #FFFF66;
+  color: #FFFF00;
 }
 
 /* Responsive Design */

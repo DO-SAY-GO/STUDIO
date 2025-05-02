@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOSAYGO Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../theme.css">
+</head>
+<body>
+  <header>
+    <h1><a href="https://dosaygo.com">DOSAYGO Studio</a></h1>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/posts.html">Posts</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </header>
+  <main>
+    <article>
+      <h2>Language Detection: Mapping Linguistic Patterns</h2>
+      <p class="author">By <a href="/about.html#cris">Cris</a>, February 1, 2013</p>
+      <p>
+        I needed to be able to detect the language of a web page to classify it for archiving and scraping. There was no reliable library for doing this at the time, so I wondered if I could achieve this natural task using something I loved and intuitively felt might apply: <a href=https://en.wikipedia.org/wiki/Lempel%E2%80%93Ziv%E2%80%93Welch>The Lempel-Ziv compression algorithm</a> or, more accurately in this case, the tokens afforded via <a href=https://link.springer.com/chapter/10.1007/978-3-642-21458-5_4>"LZ-factorization"</a> of a text. 
+      </p>
+      <p>The output of this process would be a series of short tokens that were repeated in a text. I reasoned that, for a given human language, a subset of these would converge upon some kind of "fingerprint" of the language, because langauges tend to repeat such morphemes to convey meaning, and do so in distinctive ways. I also felt that this would be a good way to delimit one language from another, because the specific morpheme fingerprint would differ between languages &mdash; French would have the same distribution of morphemes as English for example.</p>
+      <p>I manually created per-language corpora for over 100 human languages, and calculated their per language fingerprints using LZ factorization, and then scored a given text based on the similarity between its LZ factorization and the fingerprint for each language, yielding a confidence score that was accurate to a single sentence. That is, if a text (a web page, for example) switched languages mid-paragraph, I could detect where one language ended and another begun with this method.</p>
+    </article>
+  </main>
+  <footer>
+    <p>© 2025 DOSAYGO Studio. <a href="/contact.html">Contact</a></p>
+  </footer>
+</body>
+</html>

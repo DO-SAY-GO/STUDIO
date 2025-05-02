@@ -1,3 +1,5 @@
+----
+----
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,9 +21,9 @@
   <main>
     <article>
       <h2>dn: A Crystal Rune in the Web’s Faerie Realm</h2>
-      <p class="author">By <a href=/about.html#cris>Cris</a>, April 15, 2025</p>
-      <p>In the web’s faerie realm, where each page glimmers like a fleeting spell, I crafted <a href=https://github.com/DO-SAY-GO/dn>dn (DownloadNet)</a>—an intercepting proxy to capture these enchantments and etch them into a crystal archive. This rune preserves web requests and responses as you browse, storing them locally for offline access, a hidden magic woven as naturally as faeries dance in a moonlit glade.</p>
-      <p>The heart of <b>dn</b> lies in its ability to intercept requests, craft a unique key, and serialize responses to disk. Using the browser’s DevTools protocol, it pauses each web request, capturing its essence before it fades. From the request’s method and URL, a key is forged—a rune to identify and store the response. Headers and content are then preserved as JSON, like faerie dust sealed in a crystal vial, ready for later discovery.</p>
+      <p class="author">By Cris, April 15, 2025</p>
+      <p>In the web’s faerie realm, where each page glimmers like a fleeting spell, I crafted *dn* (DownloadNet)—an intercepting proxy to capture these enchantments and etch them into a crystal archive. This rune preserves web requests and responses as you browse, storing them locally for offline access, a hidden magic woven as naturally as faeries dance in a moonlit glade.</p>
+      <p>The heart of *dn* lies in its ability to intercept requests, craft a unique key, and serialize responses to disk. Using the browser’s DevTools protocol, it pauses each web request, capturing its essence before it fades. From the request’s method and URL, a key is forged—a rune to identify and store the response. Headers and content are then preserved as JSON, like faerie dust sealed in a crystal vial, ready for later discovery.</p>
       <pre><code>async function cacheRequest(pausedRequest) {
   const { requestId, request } = pausedRequest;
   const key = serializeRequestKey(request);  // Create key from method and URL
@@ -45,9 +47,9 @@ async function saveResponseData(key, url, response) {
   return responsePath;
 }
 </code></pre>
-      <p>This code reveals <b>dn</b>’s magic: intercepting requests with `Fetch.requestPaused`, crafting a key from the method and URL, and serializing the response—headers and content—to disk as JSON. These steps form a radiant rune, preserving the web’s glow in a local archive, a crystal of memory shimmering with privacy and precision.</p>
+      <p>This code reveals *dn*’s magic: intercepting requests with `Fetch.requestPaused`, crafting a key from the method and URL, and serializing the response—headers and content—to disk as JSON. These steps form a radiant rune, preserving the web’s glow in a local archive, a crystal of memory shimmering with privacy and precision.</p>
       <img src="dn-screenshot.jpg" alt="dn in action: a browser history search interface, set against a backdrop of a moonlit glade with glowing crystals and faeries">
-      <p>With <b>dn</b>, I wove a tapestry of innovation—request interception, key generation, and response serialization—transforming transient web pages into a lasting archive. It’s a testament to the quiet power of crystal runes, capturing the web’s faerie whispers and guarding them in a hidden realm, as eternal as a glade’s soft light.</p>
+      <p>With *dn*, I wove a tapestry of innovation—request interception, key generation, and response serialization—transforming transient web pages into a lasting archive. It’s a testament to the quiet power of crystal runes, capturing the web’s faerie whispers and guarding them in a hidden realm, as eternal as a glade’s soft light.</p>
     </article>
   </main>
   <footer>

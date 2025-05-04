@@ -1,0 +1,81 @@
+____
+----
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>STUDIO by DOSAYGO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="layout.css">
+</head>
+<body>
+  <header>
+    <h1><a href="https://dosaygo.com">STUDIO by DOSAYGO</a></h1>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/posts.html">Posts</a>
+      <a href="/about.html">About</a>
+    </nav>
+  </header>
+  <div class="plaza-ground">
+    <div class="slab slab-1"></div>
+    <div class="slab slab-2"></div>
+    <div class="slab slab-3"></div>
+    <div class="slab slab-4"></div>
+  </div>
+  <main>
+    <article>
+      <h2>A Collection of Creative Journeys</h2>
+      <p>The web stretches wide, a sky where ideas drift like clouds, their shapes a quiet song of innovation and play. Here at STUDIO, the blog of <a href="https://dosaygo.com">DOSAYGO</a>, we’ve gathered a collection of those shapes—hacks, tools, products, and experiments, each a traveler’s tale spun from fifteen years of creation. This is an incomplete map, drawn by what stirs us today, inviting you to wander its paths, to pause beneath its light, and find in its stories a whisper of the earth’s deep rhythm, a reminder that in exploration, there is home.</p>
+      
+      <h3>2025</h3>
+      <ul>
+        <li><a href="/posts/fully-hosted-guestbook-on-githubs-shared-trail.html">Fully Hosted: GitHub-Powered Guestbook</a> - April 28, 2025</li>
+        <li><a href="/posts/base437-retro-stream-in-webs-modern-ocean.html">Base437: Retro Binary Visualization in HTML</a> - March 15, 2025</li>
+      </ul>
+
+      <h3>2023</h3>
+      <ul>
+        <li><a href="/posts/dn-crystal-rune-in-the-webs-faerie-realm.html">dn: Offline Web Archiving with Search</a> - May 20, 2023</li>
+        <li><a href="/posts/rain-cascade-primes-in-webs-steady-flow.html">Rain: Precision Hashing with Primes</a> - July 10, 2023</li>
+        <li><a href="/posts/janus-serverless-path-spans-the-webs-endless-plains.html">Janus: Serverless WebRTC via GitHub Actions</a> - November 13, 2023</li>
+        <li><a href="/posts/battlespace-telemetry-sensors-in-the-webs-cosmos.html">BattleSpace Telemetry: Device Sensors in the Web’s Cosmos</a> - November 7, 2023</li>
+        <li><a href="/posts/wisprnote-echoes-of-thought-in-a-silent-grove.html">WisprNote: Offline Voice Transcription</a> - February 22, 2023</li>
+      </ul>
+
+      <h3>2021</h3>
+      <ul>
+        <li><a href="/posts/puppetromium-forgotten-technology-museum.html">Puppetromium: Remote Browser Control with JavaScript</a> - September 22, 2021</li>
+        <li><a href="/posts/devtoolium-lantern-in-browsers-hidden-passageways.html">Devtoolium: Secure Remote Debugging</a> - September 22, 2021</li>
+      </ul>
+
+      <h3>2019</h3>
+      <ul>
+        <li><a href="/posts/logos-river-of-shapes-in-the-webs-creative-ocean.html">logos: Deterministic SVG Logo Generator</a> - March 6, 2019</li>
+      </ul>
+
+      <h3>2018</h3>
+      <ul>
+        <li><a href="/posts/browserbox-faerie-crystal-in-webs-collaborative-realm.html">BrowserBox: Secure Remote Browser for Apps</a> - October 1, 2018</li>
+      </ul>
+
+      <h3>2013</h3>
+      <ul>
+        <li><a href="/posts/hacking-bioinformatics-to-select-html-elements-efficiently.html">Selector Generalization: Bioinformatics for Web Scraping</a> - January 1, 2013</li>
+        <li><a href="/posts/language-detection-mapping-linguistic-patterns.html">Language Detection: Mapping Linguistic Patterns</a> - February 1, 2013</li>
+      </ul>
+
+      <h3>Undated</h3>
+      <ul>
+        <li><a href="/posts/bang-minimalist-javascript-view-framework.html">Bang: Minimalist JavaScript View Framework</a></li>
+      </ul>
+    </article>
+  </main>
+  <footer>
+    <p>© 2025 DOSAYGO Studio. <a href="/contact.html">Contact</a></p>
+  </footer>
+</body>
+</html>

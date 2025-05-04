@@ -1,0 +1,236 @@
+/* STUDIO by DOSAYGO Theme - Neon Retro-Future Skydiver Portal - Dark Neon Orbit */
+/* Merges Variation 5's dark neon colors with Variation 6's glass pane and rotating background */
+/* Palette: Dark Black (#0F172A), Deep Purple (#4B0082), Neon Blue (#00BFFF), Neon Teal (#20E4C5), Dark White (#D3D3D3) */
+/* Typography: 'Rajdhani' for futuristic headings, 'Inconsolata' for monospaced body text */
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inconsolata', monospace;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #D3D3D3; /* Dark White for body text */
+  background: #0F172A; /* Dark Black for backdrop */
+  transition: background 0.3s ease, color 0.3s ease;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Orbiting Particle Background (from Variation 6) */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://www.transparenttextures.com/patterns/stardust.png');
+  background-size: cover;
+  opacity: 0.3;
+  z-index: -2;
+  animation: orbit 30s linear infinite;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #4B0082 0%, #00BFFF 50%, #20E4C5 100%); /* Variation 5 colors */
+  opacity: 0.2;
+  z-index: -1;
+  animation: orbit 20s linear infinite reverse;
+}
+
+@keyframes orbit {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Header */
+header {
+  background: linear-gradient(to bottom, #4B0082, #0F172A); /* Deep Purple to Dark Black gradient */
+  padding: 1.5rem 2rem;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 3px solid #20E4C5; /* Neon Teal border */
+  backdrop-filter: blur(10px);
+}
+
+header h1 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #00BFFF; /* Neon Blue for contrast */
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 10px #20E4C5, 0 0 20px #20E4C5, 0 0 30px #20E4C5; /* Neon Teal glow */
+}
+
+/* Main Content */
+main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+article {
+  background: rgba(255, 255, 255, 0.1); /* Glassmorphism effect (from Variation 6) */
+  border: 3px solid #00BFFF; /* Neon Blue border */
+  padding: 2rem;
+  box-shadow: 5px 5px 0 #4B0082, 0 0 15px rgba(0, 191, 255, 0.3); /* Deep Purple shadow + Neon Blue glow */
+  position: relative;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+article:hover {
+  transform: translateZ(20px) rotateX(5deg) rotateY(5deg);
+  box-shadow: 5px 5px 0 #4B0082, 0 0 20px rgba(0, 191, 255, 0.5);
+}
+
+article h2 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  color: #20E4C5; /* Neon Teal for headings */
+  margin-bottom: 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px #00BFFF, 0 0 20px #00BFFF;
+}
+
+article h3 {
+  font-family: 'Inconsolata', monospace;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #00BFFF;
+  margin: 1.5rem 0 0.5rem;
+}
+
+article p {
+  color: #E5E5E5; /* Dark White for article text to ensure legibility */
+  margin-bottom: 1.5rem;
+  text-align: justify;
+}
+
+article ul {
+  list-style-type: none;
+  margin-bottom: 1.5rem;
+}
+
+article ul li {
+  margin-bottom: 1rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+article ul li:before {
+  content: '🪂';
+  position: absolute;
+  left: 0;
+  font-size: 1.2rem;
+}
+
+/* Author Info */
+.author {
+  font-style: italic;
+  color: #4B0082;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Image Placeholders */
+img {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin: 2rem auto;
+  border: 3px dashed #D3D3D3;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(32, 228, 197, 0.5);
+}
+
+/* Code Blocks */
+pre {
+  font-family: 'Inconsolata', monospace;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-sizing: border-box;
+  overflow-x: auto;
+  border: 2px solid #00BFFF;
+}
+
+code {
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #E5E5E5;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(to top, #4B0082, #0F172A);
+  color: #E5E5E5;
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: #20E4C5;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #00BFFF;
+}
+
+/* Links */
+a, a:visited, a:hover, a:focus, a:link, a:active {
+  color: #20E4C5;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+a:hover, a:focus {
+  color: #00BFFF;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+
+  header {
+    padding: 1rem;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  nav a {
+    margin: 0 0.5rem;
+    font-size: 1rem;
+  }
+}

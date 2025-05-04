@@ -1,0 +1,226 @@
+/* Simplified Theme: Minimal Neon Mono with Large Chakra Logo and Nav */
+/* Palette: Dark Black (#0F172A), Neon Teal (#20E4C5), Neon Blue (#00BFFF), Dark White (#D3D3D3) */
+/* Typography: 'Rajdhani' for headings, 'Inconsolata' for body */
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inconsolata', monospace;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #D3D3D3; /* Dark White for text */
+  background: #0F172A; /* Dark Black background */
+  min-height: 100vh;
+}
+
+/* Header */
+header {
+  text-align: center;
+  padding: 4rem 0;
+  background: linear-gradient(180deg, rgba(32, 228, 197, 0.1), transparent);
+  border-bottom: 1px solid #20E4C5;
+}
+
+/* Logo */
+.logo {
+  display: block;
+  margin: 0 auto 2rem;
+  width: 400px;
+  height: 400px;
+  perspective: 1000px;
+}
+
+.logo-y {
+  filter: drop-shadow(0 0 8px #00FF00) drop-shadow(0 0 8px #0000FF);
+  transition: transform 0.3s ease;
+}
+
+.logo-o {
+  filter: drop-shadow(0 0 8px #EE82EE);
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+nav a {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.2rem;
+  color: #20E4C5;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #00BFFF;
+}
+
+/* Animations */
+@keyframes rock {
+  0%, 100% { transform: rotate3d(0, 0, 1, -2deg); }
+  50% { transform: rotate3d(0, 0, 1, 2deg); }
+}
+
+@keyframes orbit {
+  0% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(4px) translateY(-4px); }
+  50% { transform: translateX(0) translateY(-8px); }
+  75% { transform: translateX(-4px) translateY(-4px); }
+  100% { transform: translateX(0) translateY(0); }
+}
+
+/* Headings */
+h1 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.8rem;
+  font-weight: normal;
+  color: #20E4C5; /* Neon Teal */
+  padding: 0 0 0.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+a h1 {
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a h1:hover {
+  color: #00BFFF; /* Neon Blue for hover */
+}
+
+/* Paragraphs */
+p {
+  padding-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #D3D3D3;
+}
+
+header p {
+  font-size: 1rem;
+  padding-top: 0.5rem;
+}
+
+/* Main Content */
+main {
+  width: min(65ch, 85%);
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+/* Lists */
+ul {
+  list-style: none;
+  padding-top: 1rem;
+}
+
+li {
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+/* Code Blocks */
+pre {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: 5px;
+}
+
+code {
+  font-family: 'Inconsolata', monospace;
+  color: #D3D3D3;
+  white-space: pre-wrap;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1.5rem 0;
+  font-size: 0.9rem;
+  color: #D3D3D3;
+}
+
+/* Links */
+a {
+  color: #20E4C5;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #00BFFF;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .logo {
+    width: 350px;
+    height: 350px;
+  }
+
+  header {
+    padding: 3rem 0;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  header p {
+    font-size: 0.9rem;
+  }
+
+  nav {
+    gap: 1.5rem;
+  }
+
+  nav a {
+    font-size: 1.1rem;
+  }
+
+  main {
+    width: 90%;
+    padding: 1rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    width: 300px;
+    height: 300px;
+  }
+
+  header {
+    padding: 2rem 0;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  header p {
+    font-size: 0.8rem;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  nav a {
+    font-size: 1rem;
+  }
+}
